@@ -1,0 +1,19 @@
+Hulk_Red_Atlas.png
+size: 80, 162
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Hulk_Red
+  rotate: false
+  xy: 0, 0
+  size: 80, 79
+  orig: 80, 79
+  offset: 0, 0
+  index: -1
+Hulk_Red
+  rotate: false
+  xy: 0, 79
+  size: 80, 83
+  orig: 80, 83
+  offset: 0, 0
+  index: 2

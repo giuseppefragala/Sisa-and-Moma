@@ -1,0 +1,19 @@
+Hulk_Blue_Atlas.png
+size: 80, 146
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Hulk_Blue
+  rotate: false
+  xy: 0, 0
+  size: 80, 67
+  orig: 80, 67
+  offset: 0, 0
+  index: -1
+Hulk_Blue
+  rotate: false
+  xy: 0, 67
+  size: 80, 79
+  orig: 80, 79
+  offset: 0, 0
+  index: 2
