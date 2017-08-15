@@ -41,7 +41,7 @@ public class MainMenu implements Screen {
 
         gameViewport = new FitViewport(GameInfo.WIDTH, GameInfo.HIGHT, mainCamera);
 
-        background = new Texture("background.jpg");
+        background = new Texture("Background_menu.png");
         mainMenuButtons = new MainMenuButtons(game);
 
         Gdx.input.setInputProcessor(mainMenuButtons.getStage());

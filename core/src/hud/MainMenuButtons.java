@@ -111,7 +111,7 @@ public class MainMenuButtons {
             changePlayerBtn.remove();
         }
 
-        changePlayerBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("Hulk_" + GameManager.getInstance().getPlayer() + ".png"))));
+        changePlayerBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture(GameManager.getInstance().getPlayer()))));
         changePlayerBtn.setPosition(GameInfo.WIDTH - 75, GameInfo.HIGHT - 75, Align.center);
 
         changePlayerBtn.addListener(new ChangeListener() {

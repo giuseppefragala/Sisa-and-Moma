@@ -5,9 +5,9 @@ package helpers;
  */
 
 public class GameManager {
-    private static final GameManager ourInstance = new GameManager();
+    private static final GameManager instance = new GameManager();
 
-    private final String[] players = {"Blue", "Green", "Red"};
+    private final String[] players = {"sisa.png", "moma.png"};
     private int index = 1;
 
 
@@ -26,6 +26,6 @@ public class GameManager {
     }
 
     public static GameManager getInstance() {
-        return ourInstance;
+        return instance;
     }
 }

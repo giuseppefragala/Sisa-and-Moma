@@ -9,13 +9,13 @@ public class GameInfo {
     public static final int HIGHT = 480;
     public static final float PPM = 100f;
     public static final float BACKGROUND_SPEED = 2f;
-    public static final float GROUND_SPEED = 1f;
+    public static final float GROUND_SPEED = 2f;
 
-    public static final float PIPES_SPAWN_DELAY = 3F;
+    public static final float PIPES_SPAWN_DELAY = 3.8F;
     public static final float PLAYER_LINEAR_VELOCITY_X = 0.02f;
     public static final float PLAYER_LINEAR_VELOCITY_Y = 2f;
 
-    public static final float DISTANCE_BETWEEN_PIPES = 250f;
+    public static final float DISTANCE_BETWEEN_PIPES = 280f;
 
     public static final short PLAYER = 2;
     public static final short GROUND = 4;

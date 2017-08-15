@@ -34,8 +34,11 @@ public class Pipes {
     }
 
     void createPipes(float x, float y){
-        pipe1 = new Sprite(new Texture("rock1.png"));
-        pipe2 = new Sprite(new Texture("rock2.png"));
+        //pipe1 = new Sprite(new Texture("rock1.png"));
+        //pipe2 = new Sprite(new Texture("rock2.png"));
+
+        pipe1 = new Sprite(new Texture("stone1.png"));
+        pipe2 = new Sprite(new Texture("stone2.png"));
 
         pipe1.setPosition(x, y + GameInfo.DISTANCE_BETWEEN_PIPES);
         pipe2.setPosition(x, y - GameInfo.DISTANCE_BETWEEN_PIPES);
@@ -59,7 +62,7 @@ public class Pipes {
         body3.setFixedRotation(false);
 
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox((pipe1.getWidth() / 3f) / GameInfo.PPM, (pipe1.getHeight() / 2.4f) / GameInfo.PPM);
+        shape.setAsBox((pipe1.getWidth() / 2.5f) / GameInfo.PPM, (pipe1.getHeight() / 2.0f) / GameInfo.PPM);
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;

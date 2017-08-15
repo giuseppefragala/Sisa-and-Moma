@@ -160,7 +160,8 @@ public class GamePlay implements Screen, ContactListener {
 
     void createBackgrounds() {
         for (int i = 0; i < 3; i++) {
-            Sprite background = new Sprite(new Texture("background_01.jpg"));
+            //Sprite background = new Sprite(new Texture("background_01.jpg"));
+            Sprite background = new Sprite(new Texture("Background_game.jpg"));
             background.setPosition(i * background.getWidth(), 0);
             backgrounds.add(background);
         }

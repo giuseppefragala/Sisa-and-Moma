@@ -1,19 +1,19 @@
-Hulk_Red_Atlas.png
-size: 80, 162
+fish.png
+size: 160, 80
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-Hulk_Red
+fish1
   rotate: false
   xy: 0, 0
-  size: 80, 79
-  orig: 80, 79
+  size: 80, 80
+  orig: 80, 80
   offset: 0, 0
   index: -1
-Hulk_Red
+fish2
   rotate: false
-  xy: 0, 79
-  size: 80, 83
-  orig: 80, 83
+  xy: 80, 0
+  size: 80, 80
+  orig: 80, 80
   offset: 0, 0
-  index: 2
+  index: -1
