@@ -34,8 +34,6 @@ public class Pipes {
     }
 
     void createPipes(float x, float y){
-        //pipe1 = new Sprite(new Texture("rock1.png"));
-        //pipe2 = new Sprite(new Texture("rock2.png"));
 
         pipe1 = new Sprite(new Texture("stone1.png"));
         pipe2 = new Sprite(new Texture("stone2.png"));
@@ -99,7 +97,7 @@ public class Pipes {
         body1.setLinearVelocity(-1, 0);
         body2.setLinearVelocity(-1, 0);
         body3.setLinearVelocity(-1, 0);
-        if(pipe1.getX() + (GameInfo.WIDTH / 2) + 60 < mainCamera.position.x){
+        if(pipe1.getX() + (GameInfo.WIDTH / 2) + 160 < mainCamera.position.x){
             body1.setActive(false);
             body2.setActive(false);
             body3.setActive(false);

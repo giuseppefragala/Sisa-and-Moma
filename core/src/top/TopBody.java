@@ -1,4 +1,4 @@
-package ground;
+package top;
 
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -12,37 +12,37 @@ import com.badlogic.gdx.physics.box2d.World;
 import helpers.GameInfo;
 
 /**
- * Created by Giuseppe on 11/08/2017.
+ * Created by Giuseppe on 16/08/2017.
  */
 
-public class GroundBody {
+public class TopBody {
 
     private World world;
     private Body body;
 
-    public GroundBody(World world, Sprite ground) {
+    public TopBody(World world, Sprite ground) {
         this.world = world;
-        createGroundBody(ground);
+        createTopBody(ground);
     }
 
-    void createGroundBody(Sprite ground) {
+    void createTopBody(Sprite top) {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.StaticBody;
-        bodyDef.position.set(ground.getWidth() / GameInfo.PPM, (-ground.getHeight() / 2f  - 30) / GameInfo.PPM);
+        bodyDef.position.set(top.getWidth() / GameInfo.PPM, (GameInfo.HIGHT + 10f) / GameInfo.PPM);
 
         body = world.createBody(bodyDef);
 
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(ground.getWidth() / GameInfo.PPM, ground.getHeight() / GameInfo.PPM);
+        shape.setAsBox(top.getWidth() / GameInfo.PPM, -5f / GameInfo.PPM);
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
-        fixtureDef.filter.categoryBits = GameInfo.GROUND;
+        fixtureDef.filter.categoryBits = GameInfo.TOP;
 
         Fixture fixture = body.createFixture(fixtureDef);
-        fixture.setUserData(GameInfo.GROUND_USERDATA);
+        fixture.setUserData(GameInfo.TOP_USERDATA);
 
         shape.dispose();
     }
 
-} // GroundBody
+}

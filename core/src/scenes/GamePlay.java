@@ -27,11 +27,15 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.sisamoma.sam.GameMain;
 
+import coins.Coins;
 import ground.GroundBody;
 import helpers.GameInfo;
 import hud.UIHud;
 import pipes.Pipes;
 import players.Player;
+import top.TopBody;
+
+import static com.badlogic.gdx.Gdx.app;
 
 /**
  * Created by Giuseppe on 11/08/2017.
@@ -52,12 +56,14 @@ public class GamePlay implements Screen, ContactListener {
 
     private Player player;
     private GroundBody groundBody;
+    private TopBody topBody;
 
     private UIHud hud;
 
     private boolean firstTouch;
 
     private Array<Pipes> pipesArray = new Array<Pipes>();
+    private Array<Coins> coinsArray = new Array<Coins>();
 
     private Sound scoreSound, playerDiedSound, playerFlapSound;
 
@@ -81,11 +87,12 @@ public class GamePlay implements Screen, ContactListener {
         createBackgrounds();
         createGrounds();
 
-        world = new World(new Vector2(0, -9.81f), true);
+        world = new World(new Vector2(0, GameInfo.GAMEPLAY_WORLD_G_ACCELERATION), true);
         world.setContactListener(this);
 
         player = new Player(world, GameInfo.WIDTH / 2f - 30f, GameInfo.HIGHT / 2f);
         groundBody = new GroundBody(world, grounds.get(0));
+        topBody = new TopBody(world,grounds.get(0));
 
         scoreSound = Gdx.audio.newSound(Gdx.files.internal("Score.mp3"));
         playerDiedSound = Gdx.audio.newSound(Gdx.files.internal("Dead.mp3"));
@@ -93,7 +100,7 @@ public class GamePlay implements Screen, ContactListener {
 
         backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("Avenger.ogg"));
         backgroundMusic.setLooping(true);
-        Preferences prefs = Gdx.app.getPreferences("Data");
+        Preferences prefs = app.getPreferences("Data");
         boolean soundStatus = prefs.getBoolean("SoundStatus");
 
         if(soundStatus) {
@@ -120,9 +127,14 @@ public class GamePlay implements Screen, ContactListener {
         if(player.getAlive()) {
             moveBackgrounds();
             moveGrounds();
-            playerFlap();
+            playerSwim();
+
             updatePipes();
             movePipes();
+
+            updateCoin();
+            moveCoin();
+
         }
     }
 
@@ -133,6 +145,7 @@ public class GamePlay implements Screen, ContactListener {
             public void run() {
                 //put custom code
                 createPipes();
+                createCoin();
             }
         });
 
@@ -143,25 +156,25 @@ public class GamePlay implements Screen, ContactListener {
         hud.getStage().addAction(Actions.forever(sa));
     }
 
-    void playerFlap(){
+    void playerSwim(){
         if(Gdx.input.justTouched()) {
-            Preferences prefs = Gdx.app.getPreferences("Data");
+            Preferences prefs = app.getPreferences("Data");
             boolean soundStatus = prefs.getBoolean("SoundStatus");
             if(soundStatus) {
                 playerFlapSound.play();
             }
-            player.playerFlap();
+            player.playerSwim();
         }
     }
 
     void stopPlayer() {
         player.stopPlayer();
+        world.setGravity(new Vector2(0, -0.1f * GameInfo.GAMEPLAY_WORLD_G_ACCELERATION));
     }
 
     void createBackgrounds() {
         for (int i = 0; i < 3; i++) {
-            //Sprite background = new Sprite(new Texture("background_01.jpg"));
-            Sprite background = new Sprite(new Texture("Background_game.jpg"));
+            Sprite background = new Sprite(new Texture("backgroung_game.png"));
             background.setPosition(i * background.getWidth(), 0);
             backgrounds.add(background);
         }
@@ -214,6 +227,8 @@ public class GamePlay implements Screen, ContactListener {
         }
     }
 
+
+    // PIPES -------------------------------------------------------------------------------
     void createPipes() {
         Pipes pipe = new Pipes(world, GameInfo.WIDTH + GameInfo.DISTANCE_BETWEEN_PIPES);
         pipe.setMainCamera(mainCamera);
@@ -243,17 +258,56 @@ public class GamePlay implements Screen, ContactListener {
             pipe.stopPipes();
         }
     }
+    // END PIPES --------------------------------------------------------------------------
+
+
+    // COINS -------------------------------------------------------------------------------------
+    void createCoin() {
+        Coins coin = new Coins(world, GameInfo.WIDTH + GameInfo.DISTANCE_BETWEEN_PIPES / 2f);
+        coin.setMainCamera(mainCamera);
+        coinsArray.add(coin);
+    }
+
+    void drawCoin(SpriteBatch batch){
+        for(Coins coin : coinsArray){
+            coin.animateCoin(batch);
+        }
+    }
+
+    void updateCoin(){
+        for(Coins coin : coinsArray){
+            coin.updateCoin();
+        }
+    }
+
+    void moveCoin(){
+        for(Coins coin : coinsArray){
+            coin.moveCoin();
+        }
+    }
+
+    void stopCoin(){
+        for(Coins coin : coinsArray){
+            coin.stopCoin();
+        }
+    }
+    // END COINS ------------------------------------------------------------------------------------------------
+
+
 
     void playerDied() {
         backgroundMusic.stop();
-        stopPlayer();
         player.setAlive(false);
+        stopPlayer();
         player.playerDied();
+
         stopPipes();
+        stopCoin();
+
         hud.getStage().clear();
         hud.showScore();
 
-        Preferences prefs = Gdx.app.getPreferences("Data");
+        Preferences prefs = app.getPreferences("Data");
         int highScore = prefs.getInteger("Score");
 
         if(highScore < hud.getScore()) {
@@ -275,23 +329,28 @@ public class GamePlay implements Screen, ContactListener {
 
         update(delta);
 
-        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClearColor(0, 0, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         game.getBatch().begin();
 
         drawBackgrounds(game.getBatch());
-        drawGrounds(game.getBatch());
+        //drawGrounds(game.getBatch());
         player.drawIdle(game.getBatch());
         player.animatePlayer(game.getBatch());
 
-        //drawin the pipes
+
+
+        //drawing the pipes
         drawPipes(game.getBatch());
+
+        //drawing the coins
+        drawCoin(game.getBatch());
 
         game.getBatch().end();
 
-        // comment this to not show debugrender shape's line
-        //debugRenderer.render(world, debugCamera.combined);
+        // comment this to hide debugrender shape's line
+        debugRenderer.render(world, debugCamera.combined);
 
         game.getBatch().setProjectionMatrix(hud.getStage().getCamera().combined);
         hud.getStage().draw();
@@ -336,6 +395,10 @@ public class GamePlay implements Screen, ContactListener {
             pipe.disposeAll();
         }
 
+        for (Coins coin : coinsArray){
+            coin.disposeAll();
+        }
+
         scoreSound.dispose();
         playerDiedSound.dispose();
         playerFlapSound.dispose();
@@ -347,7 +410,7 @@ public class GamePlay implements Screen, ContactListener {
     @Override
     public void beginContact(Contact contact) {
 
-        Preferences prefs = Gdx.app.getPreferences("Data");
+        Preferences prefs = app.getPreferences("Data");
         boolean soundStatus = prefs.getBoolean("SoundStatus");
 
         Fixture body1, body2;
@@ -367,6 +430,15 @@ public class GamePlay implements Screen, ContactListener {
             }
         }
 
+
+        if(body1.getUserData() == "Player" && body2.getUserData() == "Coin") {
+            if(soundStatus) {
+                scoreSound.play();
+            }
+            hud.incrementScore();
+
+        }
+
         if(body1.getUserData() == "Player" && body2.getUserData() == "Ground") {
             if(player.getAlive()) {
                 if(soundStatus) {
@@ -375,6 +447,16 @@ public class GamePlay implements Screen, ContactListener {
                 playerDied();
             }
         }
+
+        if(body1.getUserData() == "Player" && body2.getUserData() == "Top") {
+            if(player.getAlive()) {
+                if(soundStatus) {
+                    playerDiedSound.play();
+                }
+                playerDied();
+            }
+        }
+
 
         if(body1.getUserData() == "Player" && body2.getUserData() == "Score") {
             if(soundStatus) {
