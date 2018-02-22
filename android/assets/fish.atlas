@@ -1,19 +1,19 @@
 fish.png
-size: 214, 79
+size: 200, 80
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 fish1
   rotate: false
   xy: 0, 0
-  size: 107, 79
-  orig: 107, 79
+  size: 100, 80
+  orig: 100, 80
   offset: 0, 0
   index: -1
 fish2
   rotate: false
-  xy: 107, 0
-  size: 107, 79
-  orig: 107, 79
+  xy: 100, 0
+  size: 100, 80
+  orig: 100, 80
   offset: 0, 0
   index: -1

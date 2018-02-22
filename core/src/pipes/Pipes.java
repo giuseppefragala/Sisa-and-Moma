@@ -13,6 +13,7 @@ import com.badlogic.gdx.physics.box2d.World;
 
 import java.util.Random;
 import helpers.GameInfo;
+import helpers.GameManager;
 
 /**
  * Created by Giuseppe on 11/08/2017.
@@ -28,9 +29,15 @@ public class Pipes {
 
     private OrthographicCamera mainCamera;
 
+    private float randomY;
+
     public Pipes(World world, float x) {
         this.world = world;
-        createPipes(x, getRandomY());
+
+        randomY = getRandomY();
+        GameManager.getInstance().setRandomY(randomY);
+
+        createPipes(x, randomY);
     }
 
     void createPipes(float x, float y){
@@ -115,8 +122,8 @@ public class Pipes {
     }
 
     float getRandomY() {
-        float max = (GameInfo.HIGHT)/ 2f + 150;
-        float min = (GameInfo.HIGHT)/ 2f - 150;
+        float max = (GameInfo.HIGHT)/ 2f + 100;
+        float min = (GameInfo.HIGHT)/ 2f - 100;
         return random.nextFloat() * (max - min) + min;
     }
 

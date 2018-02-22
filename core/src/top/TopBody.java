@@ -15,6 +15,8 @@ import helpers.GameInfo;
  * Created by Giuseppe on 16/08/2017.
  */
 
+// This element is for ending the game when player reach the water surface
+
 public class TopBody {
 
     private World world;

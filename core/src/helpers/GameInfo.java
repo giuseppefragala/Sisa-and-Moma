@@ -11,12 +11,12 @@ public class GameInfo {
     public static final float BACKGROUND_SPEED = 2f;
     public static final float GROUND_SPEED = 2f;
 
-    public static final float PIPES_SPAWN_DELAY = 3.8F;
+    public static final float PIPES_SPAWN_DELAY = 2.5F;
     public static final float PLAYER_LINEAR_VELOCITY_X = 0f; //0.02f;
     public static final float PLAYER_LINEAR_VELOCITY_Y = -2f; //2f;
-    public static final float GAMEPLAY_WORLD_G_ACCELERATION = 9.81f;
+    public static final float GAMEPLAY_WORLD_G_ACCELERATION = 5f; //9.81f;
 
-    public static final float DISTANCE_BETWEEN_PIPES = 280f;
+    public static final float DISTANCE_BETWEEN_PIPES = 300f;
 
     public static final short PLAYER = 2;
     public static final short GROUND = 4;

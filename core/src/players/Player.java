@@ -114,7 +114,7 @@ public class Player extends Sprite {
 
     void createAnimation() {
         TextureAtlas playerAtlas = new TextureAtlas("fish.atlas");
-        animation = new Animation<TextureRegion>(1f/8f, playerAtlas.getRegions()); // 1f/7f = 7 frame al secondo
+        animation = new Animation<TextureRegion>(1f/5f, playerAtlas.getRegions()); // 1f/7f = 7 frame al secondo
     }
 
     public void setAlive(boolean isAlive) {

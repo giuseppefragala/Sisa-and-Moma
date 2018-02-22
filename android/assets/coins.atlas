@@ -1,0 +1,89 @@
+coins.png
+size: 960, 78
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+coin30
+  rotate: false
+  xy: 0, 0
+  size: 80, 78
+  orig: 80, 78
+  offset: 0, 0
+  index: -1
+coin60
+  rotate: false
+  xy: 80, 0
+  size: 80, 78
+  orig: 80, 78
+  offset: 0, 0
+  index: -1
+coin90
+  rotate: false
+  xy: 160, 0
+  size: 80, 78
+  orig: 80, 78
+  offset: 0, 0
+  index: -1
+coin120
+  rotate: false
+  xy: 240, 0
+  size: 80, 78
+  orig: 80, 78
+  offset: 0, 0
+  index: -1
+coin150
+  rotate: false
+  xy: 320, 0
+  size: 80, 78
+  orig: 80, 78
+  offset: 0, 0
+  index: -1
+coin180
+  rotate: false
+  xy: 400, 0
+  size: 80, 78
+  orig: 80, 78
+  offset: 0, 0
+  index: -1
+coin210
+  rotate: false
+  xy: 480, 0
+  size: 80, 78
+  orig: 80, 78
+  offset: 0, 0
+  index: -1
+coin240
+  rotate: false
+  xy: 560, 0
+  size: 80, 78
+  orig: 80, 78
+  offset: 0, 0
+  index: -1
+coin270
+  rotate: false
+  xy: 640, 0
+  size: 80, 78
+  orig: 80, 78
+  offset: 0, 0
+  index: -1
+coin300
+  rotate: false
+  xy: 720, 0
+  size: 80, 78
+  orig: 80, 78
+  offset: 0, 0
+  index: -1
+coin330
+  rotate: false
+  xy: 800, 0
+  size: 80, 78
+  orig: 80, 78
+  offset: 0, 0
+  index: -1
+coin360
+  rotate: false
+  xy: 880, 0
+  size: 80, 78
+  orig: 80, 78
+  offset: 0, 0
+  index: -1

@@ -40,17 +40,14 @@ public class Coins extends Sprite {
     public Coins(World world, float x){
         //super(new Texture("coin1.png"));
         this.world = world;
-        createCoin(x, getRandomY());
-
+        createCoin(x, GameManager.getInstance().getRandomY());
     }
 
     void createCoin(float x, float y) {
 
         createAnimation();
 
-        setPosition(x, y + GameInfo.DISTANCE_BETWEEN_PIPES / 2f);
-
-        app.log("Create coin, pos", x + "; " + y);
+        setPosition(x, y );
 
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.KinematicBody;
@@ -84,8 +81,8 @@ public class Coins extends Sprite {
     }
 
     void createAnimation() {
-        TextureAtlas coinAtlas = new TextureAtlas("coin.atlas");
-        animation = new Animation<TextureRegion>(1f/8f, coinAtlas.getRegions()); // 1f/7f = 7 frame al secondo
+        TextureAtlas coinAtlas = new TextureAtlas("coins.atlas");
+        animation = new Animation<TextureRegion>(1f/12f, coinAtlas.getRegions()); // 1f/7f = 7 frame al secondo
     }
 
     public void updateCoin (){
@@ -113,11 +110,12 @@ public class Coins extends Sprite {
     }
 
 
-    float getRandomY() {
-        float max = (GameInfo.HIGHT)/ 2f + 100;
-        float min = (GameInfo.HIGHT)/ 2f - 100;
+    // Sostituito da GameManager.getInstance().getRandomY();
+/*    float getRandomY() {
+        float max = (GameInfo.HIGHT)/ 2f + 20;
+        float min = (GameInfo.HIGHT)/ 2f - 20;
         return random.nextFloat() * (max - min) + min;
-    }
+    }*/
 
 
 } //Coins

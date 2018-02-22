@@ -69,6 +69,8 @@ public class GamePlay implements Screen, ContactListener {
 
     Music backgroundMusic;
 
+    int count = 0;
+
     public GamePlay(GameMain game){
 
         this.game = game;
@@ -145,7 +147,13 @@ public class GamePlay implements Screen, ContactListener {
             public void run() {
                 //put custom code
                 createPipes();
-                createCoin();
+
+                count++;
+                if(count >= Math.floor(5 + 5 * Math.random())) {
+                    createCoin();
+                    count = 0;
+                }
+
             }
         });
 
@@ -169,7 +177,7 @@ public class GamePlay implements Screen, ContactListener {
 
     void stopPlayer() {
         player.stopPlayer();
-        world.setGravity(new Vector2(0, -0.1f * GameInfo.GAMEPLAY_WORLD_G_ACCELERATION));
+        world.setGravity(new Vector2(0, -0.2f * GameInfo.GAMEPLAY_WORLD_G_ACCELERATION));
     }
 
     void createBackgrounds() {
@@ -263,7 +271,7 @@ public class GamePlay implements Screen, ContactListener {
 
     // COINS -------------------------------------------------------------------------------------
     void createCoin() {
-        Coins coin = new Coins(world, GameInfo.WIDTH + GameInfo.DISTANCE_BETWEEN_PIPES / 2f);
+        Coins coin = new Coins(world, GameInfo.WIDTH + GameInfo.DISTANCE_BETWEEN_PIPES);
         coin.setMainCamera(mainCamera);
         coinsArray.add(coin);
     }
@@ -350,7 +358,7 @@ public class GamePlay implements Screen, ContactListener {
         game.getBatch().end();
 
         // comment this to hide debugrender shape's line
-        debugRenderer.render(world, debugCamera.combined);
+        //debugRenderer.render(world, debugCamera.combined);
 
         game.getBatch().setProjectionMatrix(hud.getStage().getCamera().combined);
         hud.getStage().draw();
@@ -436,6 +444,17 @@ public class GamePlay implements Screen, ContactListener {
                 scoreSound.play();
             }
             hud.incrementScore();
+
+            /*
+            //Non funziona !
+            for (Coins coin : coinsArray){
+                coin.scale(0.01f);
+            }
+            */
+
+            //Funziona
+            coinsArray.clear();
+
 
         }
 
