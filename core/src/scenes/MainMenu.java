@@ -1,5 +1,11 @@
 package scenes;
 
+/**
+ * Created by Giuseppe on 23/02/2018.
+ */
+
+
+
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
@@ -12,24 +18,19 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.sisamoma.sam.GameMain;
 
+
 import helpers.GameInfo;
 import hud.MainMenuButtons;
 
-/**
- * Created by Giuseppe on 11/08/2017.
- */
+
 
 public class MainMenu implements Screen {
 
-    private GameMain game;
+    GameMain game;
     private Texture background;
-
     private OrthographicCamera mainCamera;
     private Viewport gameViewport;
-
-
     private MainMenuButtons mainMenuButtons;
-
     Music backgroundMusic;
 
     public MainMenu(GameMain game) {
@@ -46,9 +47,9 @@ public class MainMenu implements Screen {
 
         Gdx.input.setInputProcessor(mainMenuButtons.getStage());
 
-        backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("Wolverine.ogg"));
+        backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("menu.mp3"));
         backgroundMusic.setLooping(true);
-    }
+    } //MainMenu
 
 
     public void checkSound(){
@@ -60,7 +61,7 @@ public class MainMenu implements Screen {
         }else{
             backgroundMusic.play();
         }
-    }
+    } // checkSound()
 
     @Override
     public void show() {
@@ -74,17 +75,14 @@ public class MainMenu implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         game.getBatch().begin();
-
         game.getBatch().draw(background, 0, 0);
-
-
         game.getBatch().end();
 
         game.getBatch().setProjectionMatrix(mainMenuButtons.getStage().getCamera().combined);
         mainMenuButtons.getStage().draw();
 
         checkSound();
-    }
+    } //render
 
     @Override
     public void resize(int width, int height) {
@@ -112,3 +110,4 @@ public class MainMenu implements Screen {
         backgroundMusic.dispose();
     }
 }
+

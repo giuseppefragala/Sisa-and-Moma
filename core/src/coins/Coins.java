@@ -1,31 +1,29 @@
 package coins;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.Fixture;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.physics.box2d.World;
-
-import helpers.GameInfo;
-import helpers.GameManager;
-
-import static com.badlogic.gdx.Gdx.app;
-import static com.badlogic.gdx.math.MathUtils.random;
-
-
 /**
- * Created by Giuseppe on 16/08/2017.
+ * Created by Giuseppe on 23/02/2018.
  */
+
+
+        import com.badlogic.gdx.Gdx;
+        import com.badlogic.gdx.graphics.OrthographicCamera;
+        import com.badlogic.gdx.graphics.g2d.Animation;
+        import com.badlogic.gdx.graphics.g2d.Sprite;
+        import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+        import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+        import com.badlogic.gdx.graphics.g2d.TextureRegion;
+        import com.badlogic.gdx.physics.box2d.Body;
+        import com.badlogic.gdx.physics.box2d.BodyDef;
+        import com.badlogic.gdx.physics.box2d.Fixture;
+        import com.badlogic.gdx.physics.box2d.FixtureDef;
+        import com.badlogic.gdx.physics.box2d.PolygonShape;
+        import com.badlogic.gdx.physics.box2d.World;
+
+        import helpers.GameInfo;
+        import helpers.GameManager;
+
+        import static com.badlogic.gdx.math.MathUtils.random;
+
 
 public class Coins extends Sprite {
 
@@ -75,8 +73,8 @@ public class Coins extends Sprite {
 
     public void animateCoin(SpriteBatch batch) {
         //if(isAlive) {
-            elapsedTime += Gdx.graphics.getDeltaTime();
-            batch.draw(animation.getKeyFrame(elapsedTime,true), getX() - (getWidth() / 2f), getY() - (getHeight() / 2f) );
+        elapsedTime += Gdx.graphics.getDeltaTime();
+        batch.draw(animation.getKeyFrame(elapsedTime,true), getX() - (getWidth() / 2f), getY() - (getHeight() / 2f) );
         //}
     }
 
@@ -119,6 +117,3 @@ public class Coins extends Sprite {
 
 
 } //Coins
-
-
-

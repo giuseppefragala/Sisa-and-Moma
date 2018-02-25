@@ -1,8 +1,10 @@
 package helpers;
 
 /**
- * Created by Giuseppe on 11/08/2017.
+ * Created by Giuseppe on 23/02/2018.
  */
+
+
 
 public class GameInfo {
     public static final int WIDTH = 800;
@@ -34,3 +36,4 @@ public class GameInfo {
 
     public static final int SCORE_WIDTH = 3;
 }
+

@@ -1,5 +1,8 @@
 package hud;
 
+/**
+ * Created by Giuseppe on 23/02/2018.
+ */
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
@@ -14,16 +17,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.sisamoma.sam.GameMain;
 
+import com.sisamoma.sam.GameMain;
 import helpers.GameInfo;
 import helpers.GameManager;
 import scenes.GamePlay;
 import scenes.HighScores;
 
-/**
- * Created by Giuseppe on 11/08/2017.
- */
 
 public class MainMenuButtons {
 
@@ -31,11 +31,8 @@ public class MainMenuButtons {
 
     private Stage stage;
     private Viewport gameViewport;
-
     private ImageButton playBtn, scoreBtn, changePlayerBtn, soundBtn;
-
     private boolean playSound;
-
 
     public MainMenuButtons(GameMain game) {
         this.game = game;
@@ -51,7 +48,7 @@ public class MainMenuButtons {
         changePlayer();
         changeSoundBtn();
 
-    }
+    } // MainMenuButtons
 
     void createAndPositionButtons() {
         playBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("Play.png"))));
@@ -75,7 +72,8 @@ public class MainMenuButtons {
                 //showScore();
             }
         });
-    }
+    } // createAndPositionButtons()
+
     void changeSoundBtn() {
         if(soundBtn != null){
             soundBtn.remove();
@@ -103,7 +101,7 @@ public class MainMenuButtons {
         });
         stage.addActor(soundBtn);
 
-    }
+    } // changeSoundBtn()
 
     void changePlayer() {
 
@@ -117,6 +115,8 @@ public class MainMenuButtons {
         changePlayerBtn.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+
+                // increment index of the players' array. That is, get the next player
                 GameManager.getInstance().incrementIndex();
 
                 //call changePlayer to change the player
@@ -125,8 +125,7 @@ public class MainMenuButtons {
         });
 
         stage.addActor(changePlayerBtn);
-    }
-
+    } // changePlayer()
 
 
     public Stage getStage() {

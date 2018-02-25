@@ -1,5 +1,11 @@
 package pipes;
 
+/**
+ * Created by Giuseppe on 23/02/2018.
+ */
+
+
+
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -15,9 +21,6 @@ import java.util.Random;
 import helpers.GameInfo;
 import helpers.GameManager;
 
-/**
- * Created by Giuseppe on 11/08/2017.
- */
 
 public class Pipes {
     private World world;

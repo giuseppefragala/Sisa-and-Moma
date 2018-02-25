@@ -1,5 +1,11 @@
 package top;
 
+/**
+ * Created by Giuseppe on 23/02/2018.
+ */
+
+
+
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -11,9 +17,7 @@ import com.badlogic.gdx.physics.box2d.World;
 
 import helpers.GameInfo;
 
-/**
- * Created by Giuseppe on 16/08/2017.
- */
+
 
 // This element is for ending the game when player reach the water surface
 

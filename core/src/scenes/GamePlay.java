@@ -1,5 +1,8 @@
 package scenes;
 
+/**
+ * Created by Giuseppe on 23/02/2018.
+ */
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
@@ -25,8 +28,9 @@ import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.sisamoma.sam.GameMain;
+import static com.badlogic.gdx.Gdx.app;
 
+import com.sisamoma.sam.GameMain;
 import coins.Coins;
 import ground.GroundBody;
 import helpers.GameInfo;
@@ -34,12 +38,6 @@ import hud.UIHud;
 import pipes.Pipes;
 import players.Player;
 import top.TopBody;
-
-import static com.badlogic.gdx.Gdx.app;
-
-/**
- * Created by Giuseppe on 11/08/2017.
- */
 
 public class GamePlay implements Screen, ContactListener {
     private GameMain game;
@@ -65,7 +63,7 @@ public class GamePlay implements Screen, ContactListener {
     private Array<Pipes> pipesArray = new Array<Pipes>();
     private Array<Coins> coinsArray = new Array<Coins>();
 
-    private Sound scoreSound, playerDiedSound, playerFlapSound;
+    private Sound scoreSound, coinSound, playerDiedSound, playerFlapSound;
 
     Music backgroundMusic;
 
@@ -97,10 +95,11 @@ public class GamePlay implements Screen, ContactListener {
         topBody = new TopBody(world,grounds.get(0));
 
         scoreSound = Gdx.audio.newSound(Gdx.files.internal("Score.mp3"));
+        coinSound = Gdx.audio.newSound(Gdx.files.internal("Coin.mp3"));
         playerDiedSound = Gdx.audio.newSound(Gdx.files.internal("Dead.mp3"));
         playerFlapSound = Gdx.audio.newSound(Gdx.files.internal("Fly.mp3"));
 
-        backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("Avenger.ogg"));
+        backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("game.mp3"));
         backgroundMusic.setLooping(true);
         Preferences prefs = app.getPreferences("Data");
         boolean soundStatus = prefs.getBoolean("SoundStatus");
@@ -109,7 +108,7 @@ public class GamePlay implements Screen, ContactListener {
             backgroundMusic.play();
         }
 
-    }
+    } // GamePlay
 
     void checkForFirstTouch() {
         if(!firstTouch) {
@@ -120,7 +119,7 @@ public class GamePlay implements Screen, ContactListener {
             }
         }
 
-    }
+    } // checkForFirstTouch()
 
     void update(float dt) {
 
@@ -138,7 +137,7 @@ public class GamePlay implements Screen, ContactListener {
             moveCoin();
 
         }
-    }
+    } // update
 
     void createAllPipes() {
         RunnableAction run = new RunnableAction();
@@ -162,7 +161,7 @@ public class GamePlay implements Screen, ContactListener {
         sa.addAction(run);
 
         hud.getStage().addAction(Actions.forever(sa));
-    }
+    } // createAllPipes()
 
     void playerSwim(){
         if(Gdx.input.justTouched()) {
@@ -173,7 +172,7 @@ public class GamePlay implements Screen, ContactListener {
             }
             player.playerSwim();
         }
-    }
+    } // playerSwim()
 
     void stopPlayer() {
         player.stopPlayer();
@@ -186,7 +185,7 @@ public class GamePlay implements Screen, ContactListener {
             background.setPosition(i * background.getWidth(), 0);
             backgrounds.add(background);
         }
-    }
+    } // createBackgrounds()
 
     void createGrounds() {
         for (int i = 0; i < 3; i++) {
@@ -220,7 +219,7 @@ public class GamePlay implements Screen, ContactListener {
             }
 
         }
-    }
+    } // moveBAckgrounds()
 
     void moveGrounds() {
         for(Sprite ground : grounds){
@@ -233,7 +232,7 @@ public class GamePlay implements Screen, ContactListener {
             }
 
         }
-    }
+    } // moveGrounds()
 
 
     // PIPES -------------------------------------------------------------------------------
@@ -325,7 +324,7 @@ public class GamePlay implements Screen, ContactListener {
 
         hud.createButtons();
         Gdx.input.setInputProcessor(hud.getStage());
-    }
+    } // playerDied()
 
     @Override
     public void show() {
@@ -346,8 +345,6 @@ public class GamePlay implements Screen, ContactListener {
         //drawGrounds(game.getBatch());
         player.drawIdle(game.getBatch());
         player.animatePlayer(game.getBatch());
-
-
 
         //drawing the pipes
         drawPipes(game.getBatch());
@@ -408,12 +405,13 @@ public class GamePlay implements Screen, ContactListener {
         }
 
         scoreSound.dispose();
+        coinSound.dispose();
         playerDiedSound.dispose();
         playerFlapSound.dispose();
 
         world.dispose();
 
-    }
+    } // dispose()
 
     @Override
     public void beginContact(Contact contact) {
@@ -441,7 +439,7 @@ public class GamePlay implements Screen, ContactListener {
 
         if(body1.getUserData() == "Player" && body2.getUserData() == "Coin") {
             if(soundStatus) {
-                scoreSound.play();
+                coinSound.play();
             }
             hud.incrementScore();
 
@@ -454,8 +452,6 @@ public class GamePlay implements Screen, ContactListener {
 
             //Funziona
             coinsArray.clear();
-
-
         }
 
         if(body1.getUserData() == "Player" && body2.getUserData() == "Ground") {
@@ -483,7 +479,7 @@ public class GamePlay implements Screen, ContactListener {
             }
             hud.incrementScore();
         }
-    }
+    } // beginContact
 
     @Override
     public void endContact(Contact contact) {
@@ -500,3 +496,4 @@ public class GamePlay implements Screen, ContactListener {
 
     }
 }
+

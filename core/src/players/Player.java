@@ -1,5 +1,8 @@
 package players;
 
+/**
+ * Created by Giuseppe on 23/02/2018.
+ */
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -19,26 +22,25 @@ import com.badlogic.gdx.physics.box2d.World;
 import helpers.GameInfo;
 import helpers.GameManager;
 
-import static com.badlogic.gdx.Gdx.app;
-
-/**
- * Created by Giuseppe on 11/08/2017.
- */
-
 public class Player extends Sprite {
     private World world;
     private Body body;
     private boolean isAlive;
-
     private Texture playerDead;
-
     private Animation<TextureRegion> animation;
     private float elapsedTime;
-
+    private String playerName;
+    private String playerKoName;
+    private String playerAtlasName;
 
     public Player(World world, float x, float y){
+        // In the play screen, when starting, shows the choosen player from the menu screen
         super(new Texture(GameManager.getInstance().getPlayer()));
-        playerDead = new Texture("fish_dead.png");
+
+        playerName = GameManager.getInstance().getPlayer();
+        playerKoName = playerName.substring(0, playerName.length() - 4) + "Ko.png";
+        // Set the picture for the player when get down
+        playerDead = new Texture(playerKoName);
 
         this.world = world;
         setPosition(x, y);
@@ -113,7 +115,12 @@ public class Player extends Sprite {
     }
 
     void createAnimation() {
-        TextureAtlas playerAtlas = new TextureAtlas("fish.atlas");
+
+        // Select the atlase of the choosen player
+        playerAtlasName = playerName.substring(0, playerName.length() - 4) + ".atlas";
+        TextureAtlas playerAtlas = new TextureAtlas(playerAtlasName);
+
+        // Create the animation of the player based on its atlas
         animation = new Animation<TextureRegion>(1f/5f, playerAtlas.getRegions()); // 1f/7f = 7 frame al secondo
     }
 

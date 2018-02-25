@@ -1,10 +1,13 @@
 package helpers;
 
-import static com.badlogic.gdx.math.MathUtils.random;
 
 /**
- * Created by Giuseppe on 11/08/2017.
+ * Created by Giuseppe on 23/02/2018.
  */
+
+
+import static com.badlogic.gdx.math.MathUtils.random;
+
 
 public class GameManager {
     private static final GameManager instance = new GameManager();

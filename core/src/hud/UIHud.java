@@ -1,5 +1,11 @@
 package hud;
 
+/**
+ * Created by Giuseppe on 23/02/2018.
+ */
+
+
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -16,27 +22,20 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.sisamoma.sam.GameMain;
 
+import com.sisamoma.sam.GameMain;
 import helpers.GameInfo;
 import scenes.GamePlay;
 import scenes.MainMenu;
 
-
-/**
- * Created by Giuseppe on 11/08/2017.
- */
 public class UIHud {
 
     private GameMain game;
 
     private Stage stage;
     private Viewport gameViewport;
-
     private Label scoreLabel;
-
     private ImageButton retryBtn, quitBtn;
-
     private int score;
 
     public UIHud(GameMain game) {
@@ -49,16 +48,22 @@ public class UIHud {
     }
 
     void createLabel() {
+
+
+        // html version doesn't work with freetype
         FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("GILSANUB.TTF"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 80;
-
         BitmapFont font = fontGenerator.generateFont(parameter);
 
-        scoreLabel = new Label(String.valueOf(score), new Label.LabelStyle(font, Color.CORAL));
-        scoreLabel.setPosition(GameInfo.WIDTH / 2f - scoreLabel.getWidth() / 2f - 330, GameInfo.HIGHT / 2F + 180, Align.left);
 
-    }
+        /* this code in case freetype doesn't work
+        BitmapFont font = new BitmapFont(Gdx.files.internal("myfont.fnt"));
+        */
+
+        scoreLabel = new Label(String.valueOf(score), new Label.LabelStyle(font, Color.MAGENTA));
+        scoreLabel.setPosition(GameInfo.WIDTH / 2f - scoreLabel.getWidth() / 2f - 330, GameInfo.HIGHT / 2F + 180, Align.left);
+    } // createLabel()
 
     public void createButtons() {
         retryBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("Retry.png"))));
@@ -75,9 +80,6 @@ public class UIHud {
             }
         });
 
-        stage.addActor(retryBtn);
-        stage.addActor(quitBtn);
-
         quitBtn.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -85,7 +87,10 @@ public class UIHud {
                 stage.dispose();
             }
         });
-    }
+
+        stage.addActor(retryBtn);
+        stage.addActor(quitBtn);
+    } // createButtons()
 
     public void incrementScore() {
         score++;
