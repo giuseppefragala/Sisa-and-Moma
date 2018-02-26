@@ -127,7 +127,7 @@ public class GamePlay implements Screen, ContactListener {
 
         if(player.getAlive()) {
             moveBackgrounds();
-            moveGrounds();
+            //moveGrounds();
             playerSwim();
 
             updatePipes();
@@ -212,20 +212,18 @@ public class GamePlay implements Screen, ContactListener {
         for(Sprite background : backgrounds){
             float x1 = background.getX() - GameInfo.BACKGROUND_SPEED;
             background.setPosition(x1, background.getY());
-
             if(background.getX() + GameInfo.WIDTH + (background.getWidth() / 2f ) < mainCamera.position.x){
                 float x2 = background.getX() + background.getWidth() * backgrounds.size;
                 background.setPosition(x2, background.getY());
             }
 
         }
-    } // moveBAckgrounds()
+    } // moveBackgrounds()
 
     void moveGrounds() {
         for(Sprite ground : grounds){
             float x1 = ground.getX() - GameInfo.GROUND_SPEED;
             ground.setPosition(x1, ground.getY());
-
             if(ground.getX() + GameInfo.WIDTH + (ground.getWidth() / 2f ) < mainCamera.position.x){
                 float x2 = ground.getX() + ground.getWidth() * backgrounds.size;
                 ground.setPosition(x2, ground.getY());

@@ -104,9 +104,9 @@ public class Pipes {
     }
 
     public void movePipes() {
-        body1.setLinearVelocity(-1, 0);
-        body2.setLinearVelocity(-1, 0);
-        body3.setLinearVelocity(-1, 0);
+        body1.setLinearVelocity(-1f, 0);
+        body2.setLinearVelocity(-1f, 0);
+        body3.setLinearVelocity(-1f, 0);
         if(pipe1.getX() + (GameInfo.WIDTH / 2) + 160 < mainCamera.position.x){
             body1.setActive(false);
             body2.setActive(false);
