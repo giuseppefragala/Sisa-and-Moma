@@ -13,7 +13,7 @@ public class GameInfo {
     public static final float BACKGROUND_SPEED = 2f;
     public static final float GROUND_SPEED = 2f;
 
-    public static final float PIPES_SPAWN_DELAY = 2.5F;
+    public static final float PIPES_SPAWN_DELAY = 2.0F;
     public static final float PLAYER_LINEAR_VELOCITY_X = 0f; //0.02f;
     public static final float PLAYER_LINEAR_VELOCITY_Y = -2f; //2f;
     public static final float GAMEPLAY_WORLD_G_ACCELERATION = 5f; //9.81f;
