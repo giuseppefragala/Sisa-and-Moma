@@ -83,8 +83,8 @@ public class HighScores implements Screen {
         stage.draw();
 
         Preferences prefs = app.getPreferences("Data");
-        boolean soundStatus = prefs.getBoolean("SoundStatus");
-        if(soundStatus) {
+        boolean musicStatus = prefs.getBoolean("MusicStatus");
+        if(musicStatus) {
             backgroundMusic.play();
         }
 

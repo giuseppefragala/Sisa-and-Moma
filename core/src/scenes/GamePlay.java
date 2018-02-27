@@ -59,7 +59,9 @@ public class GamePlay implements Screen, ContactListener {
     private UIHud hud;
 
     private boolean firstTouch;
-
+    private Preferences prefs;
+    private boolean musicStatus;
+    private boolean soundStatus;
     private Array<Pipes> pipesArray = new Array<Pipes>();
     private Array<Coins> coinsArray = new Array<Coins>();
 
@@ -101,10 +103,10 @@ public class GamePlay implements Screen, ContactListener {
 
         backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("game.mp3"));
         backgroundMusic.setLooping(true);
-        Preferences prefs = app.getPreferences("Data");
-        boolean soundStatus = prefs.getBoolean("SoundStatus");
-
-        if(soundStatus) {
+        prefs = app.getPreferences("Data");
+        musicStatus = prefs.getBoolean("MusicStatus");
+        soundStatus = prefs.getBoolean("SoundStatus");
+        if(musicStatus) {
             backgroundMusic.play();
         }
 
@@ -165,8 +167,6 @@ public class GamePlay implements Screen, ContactListener {
 
     void playerSwim(){
         if(Gdx.input.justTouched()) {
-            Preferences prefs = app.getPreferences("Data");
-            boolean soundStatus = prefs.getBoolean("SoundStatus");
             if(soundStatus) {
                 playerFlapSound.play();
             }
@@ -312,7 +312,6 @@ public class GamePlay implements Screen, ContactListener {
         hud.getStage().clear();
         hud.showScore();
 
-        Preferences prefs = app.getPreferences("Data");
         int highScore = prefs.getInteger("Score");
 
         if(highScore < hud.getScore()) {
@@ -413,10 +412,6 @@ public class GamePlay implements Screen, ContactListener {
 
     @Override
     public void beginContact(Contact contact) {
-
-        Preferences prefs = app.getPreferences("Data");
-        boolean soundStatus = prefs.getBoolean("SoundStatus");
-
         Fixture body1, body2;
         if(contact.getFixtureA().getUserData() == "Player") {
             body1 = contact.getFixtureA();

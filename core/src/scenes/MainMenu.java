@@ -52,11 +52,11 @@ public class MainMenu implements Screen {
     } //MainMenu
 
 
-    public void checkSound(){
+    public void checkMusic(){
         Preferences prefs = Gdx.app.getPreferences("Data");
-        boolean soundStatus = prefs.getBoolean("SoundStatus");
+        boolean musicStatus = prefs.getBoolean("MusicStatus");
 
-        if(!soundStatus) {
+        if(!musicStatus) {
             backgroundMusic.stop();
         }else{
             backgroundMusic.play();
@@ -81,7 +81,7 @@ public class MainMenu implements Screen {
         game.getBatch().setProjectionMatrix(mainMenuButtons.getStage().getCamera().combined);
         mainMenuButtons.getStage().draw();
 
-        checkSound();
+        checkMusic();
     } //render
 
     @Override

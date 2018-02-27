@@ -36,13 +36,18 @@ public class MainMenuButtons {
 
     private Stage stage;
     private Viewport gameViewport;
-    private ImageButton playBtn, scoreBtn, changePlayerBtn, soundBtn;
-    private boolean playSound;
-    private Label scoreLabel;
+    private ImageButton playBtn, scoreBtn, changePlayerBtn, musicBtn, soundBtn;
+    private boolean playMusic, playSound;
+    private Label playerLabel;
     private Sound changePlayerSound;
+    private Preferences prefs;
+    private boolean musicStatus;
+    private boolean soundStatus;
 
     public MainMenuButtons(GameMain game) {
         this.game = game;
+        prefs = Gdx.app.getPreferences("Data");
+
 
         gameViewport = new FitViewport(GameInfo.WIDTH, GameInfo.HIGHT, new OrthographicCamera());
         stage = new Stage(gameViewport, game.getBatch());
@@ -55,8 +60,9 @@ public class MainMenuButtons {
         changePlayerSound = Gdx.audio.newSound(Gdx.files.internal("changePlayer.mp3"));
         createLabel();
         changePlayer();
+        changeMusicBtn();
         changeSoundBtn();
-        stage.addActor(scoreLabel);
+        stage.addActor(playerLabel);
 
 
     } // MainMenuButtons
@@ -85,21 +91,47 @@ public class MainMenuButtons {
         });
     } // createAndPositionButtons()
 
+    void changeMusicBtn() {
+        if(musicBtn != null){
+            musicBtn.remove();
+        }
+
+        musicStatus = prefs.getBoolean("MusicStatus");
+        if(musicStatus) {
+            musicBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("musicOn.png"))));
+        }else {
+            musicBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("musicOff.png"))));
+        }
+
+        musicBtn.setPosition(GameInfo.WIDTH - 75, 75, Align.center);
+
+        musicBtn.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                playMusic = !playMusic;
+                prefs.putBoolean("MusicStatus", playMusic);
+                prefs.flush();
+                changeMusicBtn();
+            }
+        });
+        stage.addActor(musicBtn);
+
+    } // changeMusicBtn()
+
+
     void changeSoundBtn() {
         if(soundBtn != null){
             soundBtn.remove();
         }
 
-        final Preferences prefs = Gdx.app.getPreferences("Data");
-        boolean soundStatus = prefs.getBoolean("SoundStatus");
-
+        soundStatus = prefs.getBoolean("SoundStatus");
         if(soundStatus) {
-            soundBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("Sound-on.png"))));
+            soundBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("soundOn.png"))));
         }else {
-            soundBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("Sound-off.png"))));
+            soundBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("soundOff.png"))));
         }
 
-        soundBtn.setPosition(GameInfo.WIDTH - 75, 75, Align.center);
+        soundBtn.setPosition(75, 75, Align.center);
 
         soundBtn.addListener(new ChangeListener() {
             @Override
@@ -114,17 +146,15 @@ public class MainMenuButtons {
 
     } // changeSoundBtn()
 
+
+
     void changePlayer() {
 
         if(changePlayerBtn != null){
             changePlayerBtn.remove();
         }
 
-        if(scoreLabel.getText().toString().contains("Sisa")){
-            scoreLabel.setText("Moma");
-        }else{
-            scoreLabel.setText("Sisa");
-        }
+        playerLabel.setText(GameManager.getInstance().getPlayer().substring(0,4).toUpperCase());
 
         changePlayerBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture(GameManager.getInstance().getPlayer()))));
         changePlayerBtn.setPosition(GameInfo.WIDTH - 75, GameInfo.HIGHT - 75, Align.center);
@@ -136,8 +166,13 @@ public class MainMenuButtons {
                 // increment index of the players' array. That is, get the next player
                 GameManager.getInstance().incrementIndex();
 
+                soundStatus = prefs.getBoolean("SoundStatus");
+                //Check if can run change player sound
+                if(soundStatus){
+                    changePlayerSound.play();
+                }
+
                 //call changePlayer to change the player
-                changePlayerSound.play();
                 changePlayer();
             }
         });
@@ -162,8 +197,8 @@ public class MainMenuButtons {
         /* this code in case freetype doesn't work
         BitmapFont font = new BitmapFont(Gdx.files.internal("myfont.fnt"));
         */
-        scoreLabel = new Label("Sisa", new Label.LabelStyle(font, new Color(204f/255f, 65f/255f, 65f/255f, 1f)));
-        scoreLabel.setPosition(GameInfo.WIDTH - 375, GameInfo.HIGHT - 75, Align.center);
+        playerLabel = new Label("Sisa", new Label.LabelStyle(font, new Color(204f/255f, 65f/255f, 65f/255f, 1f)));
+        playerLabel.setPosition(120, GameInfo.HIGHT - 75, Align.center);
     } // createLabel()
 
 
