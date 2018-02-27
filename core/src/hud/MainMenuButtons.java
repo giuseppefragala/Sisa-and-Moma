@@ -6,12 +6,17 @@ package hud;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
@@ -33,6 +38,8 @@ public class MainMenuButtons {
     private Viewport gameViewport;
     private ImageButton playBtn, scoreBtn, changePlayerBtn, soundBtn;
     private boolean playSound;
+    private Label scoreLabel;
+    private Sound changePlayerSound;
 
     public MainMenuButtons(GameMain game) {
         this.game = game;
@@ -45,8 +52,12 @@ public class MainMenuButtons {
         stage.addActor(playBtn);
         stage.addActor(scoreBtn);
 
+        changePlayerSound = Gdx.audio.newSound(Gdx.files.internal("changePlayer.mp3"));
+        createLabel();
         changePlayer();
         changeSoundBtn();
+        stage.addActor(scoreLabel);
+
 
     } // MainMenuButtons
 
@@ -109,6 +120,12 @@ public class MainMenuButtons {
             changePlayerBtn.remove();
         }
 
+        if(scoreLabel.getText().toString().contains("Sisa")){
+            scoreLabel.setText("Moma");
+        }else{
+            scoreLabel.setText("Sisa");
+        }
+
         changePlayerBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture(GameManager.getInstance().getPlayer()))));
         changePlayerBtn.setPosition(GameInfo.WIDTH - 75, GameInfo.HIGHT - 75, Align.center);
 
@@ -120,6 +137,7 @@ public class MainMenuButtons {
                 GameManager.getInstance().incrementIndex();
 
                 //call changePlayer to change the player
+                changePlayerSound.play();
                 changePlayer();
             }
         });
@@ -132,4 +150,24 @@ public class MainMenuButtons {
         return this.stage;
     }
 
+
+    void createLabel() {
+        // html version doesn't work with freetype
+        FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("GILSANUB.TTF"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = 80;
+        BitmapFont font = fontGenerator.generateFont(parameter);
+
+
+        /* this code in case freetype doesn't work
+        BitmapFont font = new BitmapFont(Gdx.files.internal("myfont.fnt"));
+        */
+        scoreLabel = new Label("Sisa", new Label.LabelStyle(font, new Color(204f/255f, 65f/255f, 65f/255f, 1f)));
+        scoreLabel.setPosition(GameInfo.WIDTH - 375, GameInfo.HIGHT - 75, Align.center);
+    } // createLabel()
+
+
+
 } // main menu buttons
+
+

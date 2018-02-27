@@ -25,6 +25,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 import com.sisamoma.sam.GameMain;
 import helpers.GameInfo;
+import javafx.scene.control.ColorPicker;
 import scenes.GamePlay;
 import scenes.MainMenu;
 
@@ -43,7 +44,6 @@ public class UIHud {
         gameViewport = new FitViewport(GameInfo.WIDTH, GameInfo.HIGHT, new OrthographicCamera());
         stage = new Stage(gameViewport,game.getBatch());
         createLabel();
-
         stage.addActor(scoreLabel);
     }
 
@@ -60,8 +60,7 @@ public class UIHud {
         /* this code in case freetype doesn't work
         BitmapFont font = new BitmapFont(Gdx.files.internal("myfont.fnt"));
         */
-
-        scoreLabel = new Label(String.valueOf(score), new Label.LabelStyle(font, Color.MAGENTA));
+        scoreLabel = new Label(String.valueOf(score), new Label.LabelStyle(font, new Color(204f/255f, 65f/255f, 65f/255f, 1f)));
         scoreLabel.setPosition(GameInfo.WIDTH / 2f - scoreLabel.getWidth() / 2f - 330, GameInfo.HIGHT / 2F + 180, Align.left);
     } // createLabel()
 

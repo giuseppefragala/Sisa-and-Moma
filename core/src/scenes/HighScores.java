@@ -135,7 +135,7 @@ public class HighScores implements Screen {
         BitmapFont font = new BitmapFont(Gdx.files.internal("myfont.fnt"));
         */
         Preferences prefs = Gdx.app.getPreferences("Data");
-        scoreLabel = new Label(String.valueOf(prefs.getInteger("Score")), new Label.LabelStyle(font, Color.FIREBRICK));
+        scoreLabel = new Label(String.valueOf(prefs.getInteger("Score")), new Label.LabelStyle(font, new Color(204f/255f, 65f/255f, 65f/255f, 1f)));
         scoreLabel.setPosition(GameInfo.WIDTH / 2f, GameInfo.HIGHT /2f + 50f, Align.center);
         stage.addActor(scoreLabel);
 
