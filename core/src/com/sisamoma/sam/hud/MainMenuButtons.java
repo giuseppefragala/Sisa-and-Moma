@@ -1,4 +1,4 @@
-package hud;
+package com.sisamoma.sam.hud;
 
 /**
  * Created by Giuseppe on 23/02/2018.
@@ -24,10 +24,10 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import com.sisamoma.sam.GameMain;
-import helpers.GameInfo;
-import helpers.GameManager;
-import scenes.GamePlay;
-import scenes.HighScores;
+import com.sisamoma.sam.helpers.GameInfo;
+import com.sisamoma.sam.helpers.GameManager;
+import com.sisamoma.sam.scenes.GamePlay;
+import com.sisamoma.sam.scenes.HighScores;
 
 
 public class MainMenuButtons {
@@ -163,7 +163,7 @@ public class MainMenuButtons {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
-                // increment index of the players' array. That is, get the next player
+                // increment index of the com.sisamoma.sam.players' array. That is, get the next player
                 GameManager.getInstance().incrementIndex();
 
                 soundStatus = prefs.getBoolean("SoundStatus");

@@ -1,4 +1,4 @@
-package players;
+package com.sisamoma.sam.players;
 
 /**
  * Created by Giuseppe on 23/02/2018.
@@ -19,8 +19,8 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
-import helpers.GameInfo;
-import helpers.GameManager;
+import com.sisamoma.sam.helpers.GameInfo;
+import com.sisamoma.sam.helpers.GameManager;
 
 public class Player extends Sprite {
     private World world;

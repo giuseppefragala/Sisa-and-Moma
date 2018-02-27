@@ -1,4 +1,4 @@
-package coins;
+package com.sisamoma.sam.coins;
 
 /**
  * Created by Giuseppe on 23/02/2018.
@@ -19,8 +19,8 @@ package coins;
         import com.badlogic.gdx.physics.box2d.PolygonShape;
         import com.badlogic.gdx.physics.box2d.World;
 
-        import helpers.GameInfo;
-        import helpers.GameManager;
+        import com.sisamoma.sam.helpers.GameInfo;
+        import com.sisamoma.sam.helpers.GameManager;
 
         import static com.badlogic.gdx.math.MathUtils.random;
 

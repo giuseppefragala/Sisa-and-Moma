@@ -1,4 +1,4 @@
-package scenes;
+package com.sisamoma.sam.scenes;
 
 /**
  * Created by Giuseppe on 23/02/2018.
@@ -29,7 +29,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import com.sisamoma.sam.GameMain;
-import helpers.GameInfo;
+import com.sisamoma.sam.helpers.GameInfo;
 
 import static com.badlogic.gdx.Gdx.app;
 

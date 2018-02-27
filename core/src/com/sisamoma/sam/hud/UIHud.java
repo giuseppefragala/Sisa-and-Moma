@@ -1,4 +1,4 @@
-package hud;
+package com.sisamoma.sam.hud;
 
 /**
  * Created by Giuseppe on 23/02/2018.
@@ -24,10 +24,10 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import com.sisamoma.sam.GameMain;
-import helpers.GameInfo;
-import javafx.scene.control.ColorPicker;
-import scenes.GamePlay;
-import scenes.MainMenu;
+import com.sisamoma.sam.helpers.GameInfo;
+
+import com.sisamoma.sam.scenes.GamePlay;
+import com.sisamoma.sam.scenes.MainMenu;
 
 public class UIHud {
 

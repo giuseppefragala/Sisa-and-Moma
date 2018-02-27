@@ -1,4 +1,4 @@
-package scenes;
+package com.sisamoma.sam.scenes;
 
 /**
  * Created by Giuseppe on 23/02/2018.
@@ -19,8 +19,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.sisamoma.sam.GameMain;
 
 
-import helpers.GameInfo;
-import hud.MainMenuButtons;
+import com.sisamoma.sam.helpers.GameInfo;
+import com.sisamoma.sam.hud.MainMenuButtons;
 
 
 

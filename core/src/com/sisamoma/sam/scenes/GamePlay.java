@@ -1,4 +1,4 @@
-package scenes;
+package com.sisamoma.sam.scenes;
 
 /**
  * Created by Giuseppe on 23/02/2018.
@@ -31,13 +31,13 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import static com.badlogic.gdx.Gdx.app;
 
 import com.sisamoma.sam.GameMain;
-import coins.Coins;
-import ground.GroundBody;
-import helpers.GameInfo;
-import hud.UIHud;
-import pipes.Pipes;
-import players.Player;
-import top.TopBody;
+import com.sisamoma.sam.coins.Coins;
+import com.sisamoma.sam.ground.GroundBody;
+import com.sisamoma.sam.helpers.GameInfo;
+import com.sisamoma.sam.hud.UIHud;
+import com.sisamoma.sam.pipes.Pipes;
+import com.sisamoma.sam.players.Player;
+import com.sisamoma.sam.top.TopBody;
 
 public class GamePlay implements Screen, ContactListener {
     private GameMain game;
@@ -343,10 +343,10 @@ public class GamePlay implements Screen, ContactListener {
         player.drawIdle(game.getBatch());
         player.animatePlayer(game.getBatch());
 
-        //drawing the pipes
+        //drawing the com.sisamoma.sam.pipes
         drawPipes(game.getBatch());
 
-        //drawing the coins
+        //drawing the com.sisamoma.sam.coins
         drawCoin(game.getBatch());
 
         game.getBatch().end();

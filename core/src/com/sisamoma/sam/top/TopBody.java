@@ -1,4 +1,4 @@
-package top;
+package com.sisamoma.sam.top;
 
 /**
  * Created by Giuseppe on 23/02/2018.
@@ -15,7 +15,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
-import helpers.GameInfo;
+import com.sisamoma.sam.helpers.GameInfo;
 
 
 

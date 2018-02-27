@@ -5,7 +5,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.sisamoma.sam.GameMain;
 
-import helpers.GameInfo;
+import com.sisamoma.sam.helpers.GameInfo;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {

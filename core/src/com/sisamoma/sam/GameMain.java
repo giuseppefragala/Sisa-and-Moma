@@ -3,7 +3,7 @@ package com.sisamoma.sam;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import scenes.MainMenu;
+import com.sisamoma.sam.scenes.MainMenu;
 
 /**
  * Created by Giuseppe on 11/08/2017.

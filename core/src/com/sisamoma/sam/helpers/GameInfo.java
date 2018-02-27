@@ -1,4 +1,4 @@
-package helpers;
+package com.sisamoma.sam.helpers;
 
 /**
  * Created by Giuseppe on 23/02/2018.
