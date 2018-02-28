@@ -333,7 +333,7 @@ public class GamePlay implements Screen, ContactListener {
 
         update(delta);
 
-        Gdx.gl.glClearColor(0, 0, 1, 1);
+        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         game.getBatch().begin();
@@ -429,22 +429,14 @@ public class GamePlay implements Screen, ContactListener {
             }
         }
 
-
         if(body1.getUserData() == "Player" && body2.getUserData() == "Coin") {
-            if(soundStatus) {
-                coinSound.play();
+            if(coinsArray.size > 0) { //this to avoid "contacting" the same coin twice
+                if (soundStatus) {
+                    coinSound.play();
+                }
+                hud.incrementScore();
+                coinsArray.clear();
             }
-            hud.incrementScore();
-
-            /*
-            //Non funziona !
-            for (Coins coin : coinsArray){
-                coin.scale(0.01f);
-            }
-            */
-
-            //Funziona
-            coinsArray.clear();
         }
 
         if(body1.getUserData() == "Player" && body2.getUserData() == "Ground") {
