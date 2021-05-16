@@ -82,6 +82,21 @@ public class GamePlay implements Screen, ContactListener {
     private boolean isSensor = false;
 
     private ParticleEffect pe;
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            if (GameManager.getInstance().getGameStatus()) {
+                createPipes();
+                count++;
+                //generate a new coin after 5 to 10 pipe
+                if (count >= Math.floor(5 + 5 * Math.random())) {
+                    createCoin();
+                    count = 0;
+                }
+            }
+        }
+    };
+
 
     public GamePlay(GameMain game) {
 
@@ -134,7 +149,6 @@ public class GamePlay implements Screen, ContactListener {
         Gdx.input.setInputProcessor(hud.getStage());
     } // GamePlay
 
-
     private void checkForFirstTouch() {
         if (!firstTouch) {
             if (Gdx.input.justTouched()) {
@@ -144,22 +158,6 @@ public class GamePlay implements Screen, ContactListener {
             }
         }
     } // checkForFirstTouch()
-
-    private Runnable runnable = new Runnable() {
-        @Override
-        public void run() {
-            if (GameManager.getInstance().getGameStatus()) {
-                createPipes();
-                count++;
-                //generate a new coin after 5 to 10 pipe
-                if (count >= Math.floor(5 + 5 * Math.random())) {
-                    createCoin();
-                    count = 0;
-                }
-            }
-        }
-    };
-
 
     private void createAllPipes() {
         //thread = new Thread(runnable);

@@ -11,7 +11,6 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-
 import com.sisamoma.sam.helpers.GameInfo;
 
 
@@ -28,7 +27,7 @@ public class GroundBody {
     private void createGroundBody(Sprite ground) {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.StaticBody;
-        bodyDef.position.set(ground.getWidth() / GameInfo.PPM, (-ground.getHeight() / 2f  - 30) / GameInfo.PPM);
+        bodyDef.position.set(ground.getWidth() / GameInfo.PPM, (-ground.getHeight() / 2f - 30) / GameInfo.PPM);
 
         body = world.createBody(bodyDef);
 

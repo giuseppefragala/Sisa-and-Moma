@@ -18,7 +18,6 @@ import com.sisamoma.sam.helpers.GameInfo;
 import com.sisamoma.sam.hud.MainMenuButtons;
 
 
-
 public class MainMenu implements Screen {
 
     private GameMain game;
@@ -50,7 +49,7 @@ public class MainMenu implements Screen {
         backgroundMusic.setLooping(true);
     } //MainMenu
 
-    private void checkMusic(){
+    private void checkMusic() {
 
         //Gdx.app.getPreferences("Data") corrisponde ad un file, in questo caso chiamato Data.xml
         //che ha una struttura del genere:
@@ -66,9 +65,9 @@ public class MainMenu implements Screen {
         Preferences prefs = Gdx.app.getPreferences("Data");
         boolean musicStatus = prefs.getBoolean("MusicStatus");
 
-        if(!musicStatus) {
+        if (!musicStatus) {
             backgroundMusic.stop();
-        }else{
+        } else {
             backgroundMusic.play();
         }
     } // checkSound()

@@ -18,11 +18,8 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-
 import com.sisamoma.sam.helpers.GameInfo;
 import com.sisamoma.sam.helpers.GameManager;
-
-import static com.badlogic.gdx.math.MathUtils.random;
 
 
 public class Coins extends Sprite {
@@ -35,7 +32,7 @@ public class Coins extends Sprite {
 
     private OrthographicCamera mainCamera;
 
-    public Coins(World world, float x){
+    public Coins(World world, float x) {
         //super(new Texture("coin1.png"));
         this.world = world;
         createCoin(x, GameManager.getInstance().getRandomY());
@@ -45,11 +42,11 @@ public class Coins extends Sprite {
 
         createAnimation();
 
-        setPosition(x, y );
+        setPosition(x, y);
 
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.KinematicBody;
-        bodyDef.position.set(getX() / GameInfo.PPM, (getY()  ) / GameInfo.PPM);
+        bodyDef.position.set(getX() / GameInfo.PPM, (getY()) / GameInfo.PPM);
 
         body = world.createBody(bodyDef);
         body.setFixedRotation(false);
@@ -73,25 +70,25 @@ public class Coins extends Sprite {
 
     public void animateCoin(SpriteBatch batch) {
         //if(isAlive) {
-        if(GameManager.getInstance().getGameStatus()) {
+        if (GameManager.getInstance().getGameStatus()) {
             elapsedTime += Gdx.graphics.getDeltaTime();
         }
-        batch.draw(animation.getKeyFrame(elapsedTime,true), getX() - (getWidth() / 2f), getY() - (getHeight() / 2f) );
+        batch.draw(animation.getKeyFrame(elapsedTime, true), getX() - (getWidth() / 2f), getY() - (getHeight() / 2f));
         //}
     }
 
     private void createAnimation() {
         TextureAtlas coinAtlas = new TextureAtlas("coins.atlas");
-        animation = new Animation<TextureRegion>(1f/12f, coinAtlas.getRegions()); // 1f/7f = 7 frame al secondo
+        animation = new Animation<TextureRegion>(1f / 12f, coinAtlas.getRegions()); // 1f/7f = 7 frame al secondo
     }
 
-    public void updateCoin (){
+    public void updateCoin() {
         setPosition(body.getPosition().x * GameInfo.PPM, body.getPosition().y * GameInfo.PPM);
     }
 
     public void moveCoin() {
         body.setLinearVelocity(-1, 0);
-        if(this.getX() + (GameInfo.WIDTH / 2) + 160 < mainCamera.position.x){
+        if (this.getX() + (GameInfo.WIDTH / 2) + 160 < mainCamera.position.x) {
             body.setActive(false);
         }
     }

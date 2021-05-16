@@ -5,7 +5,6 @@ package com.sisamoma.sam.helpers;
  */
 
 
-
 public class GameInfo {
     public static final int WIDTH = 800;
     public static final int HIGTH = 480;

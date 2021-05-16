@@ -12,7 +12,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-//import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -23,7 +22,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-
 import com.sisamoma.sam.GameMain;
 import com.sisamoma.sam.helpers.GameInfo;
 import com.sisamoma.sam.helpers.GameManager;
@@ -72,8 +70,8 @@ public class MainMenuButtons {
         playBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("Play.png"))));
         scoreBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("Score.png"))));
 
-        playBtn.setPosition(75, GameInfo.HIGTH / 2f , Align.center);
-        scoreBtn.setPosition(GameInfo.WIDTH - 75, GameInfo.HIGTH / 2f , Align.center);
+        playBtn.setPosition(75, GameInfo.HIGTH / 2f, Align.center);
+        scoreBtn.setPosition(GameInfo.WIDTH - 75, GameInfo.HIGTH / 2f, Align.center);
 
         playBtn.addListener(new ChangeListener() {
             @Override
@@ -95,14 +93,14 @@ public class MainMenuButtons {
     } // createAndPositionButtons()
 
     private void changeMusicBtn() {
-        if(musicBtn != null){
+        if (musicBtn != null) {
             musicBtn.remove();
         }
 
         musicStatus = prefs.getBoolean("MusicStatus");
-        if(musicStatus) {
+        if (musicStatus) {
             musicBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("musicOn.png"))));
-        }else {
+        } else {
             musicBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("musicOff.png"))));
         }
 
@@ -123,14 +121,14 @@ public class MainMenuButtons {
 
 
     private void changeSoundBtn() {
-        if(soundBtn != null){
+        if (soundBtn != null) {
             soundBtn.remove();
         }
 
         soundStatus = prefs.getBoolean("SoundStatus");
-        if(soundStatus) {
+        if (soundStatus) {
             soundBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("soundOn.png"))));
-        }else {
+        } else {
             soundBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("soundOff.png"))));
         }
 
@@ -150,15 +148,14 @@ public class MainMenuButtons {
     } // changeSoundBtn()
 
 
-
     private void changePlayer() {
-        if(changePlayerBtn != null){
+        if (changePlayerBtn != null) {
             changePlayerBtn.remove();
         }
         changePlayerBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture(GameManager.getInstance().getPlayerImageName()))));
         changePlayerBtn.setPosition(GameInfo.WIDTH - 75, GameInfo.HIGTH - 75, Align.center);
 
-        playerLabel.setText(GameManager.getInstance().getPlayerImageName().substring(0,4).toUpperCase());
+        playerLabel.setText(GameManager.getInstance().getPlayerImageName().substring(0, 4).toUpperCase());
 
         changePlayerBtn.addListener(new ChangeListener() {
             @Override
@@ -169,7 +166,7 @@ public class MainMenuButtons {
 
                 soundStatus = prefs.getBoolean("SoundStatus");
                 //Check if can run change player sound
-                if(soundStatus){
+                if (soundStatus) {
                     changePlayerSound.play();
                 }
 
@@ -193,7 +190,7 @@ public class MainMenuButtons {
         FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("Mali-Bold.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 80;
-        parameter.shadowColor= Color.BLUE;
+        parameter.shadowColor = Color.BLUE;
         parameter.shadowOffsetX = 10;
         parameter.shadowOffsetY = 6;
         BitmapFont font = fontGenerator.generateFont(parameter);
@@ -202,7 +199,7 @@ public class MainMenuButtons {
         //* this code in case freetype doesn't work
         //BitmapFont font = new BitmapFont(Gdx.files.internal("myfont.fnt"));
         //*/
-        playerLabel = new Label("Sisa", new Label.LabelStyle(font, new Color(204f/255f, 65f/255f, 65f/255f, 1f)));
+        playerLabel = new Label("Sisa", new Label.LabelStyle(font, new Color(204f / 255f, 65f / 255f, 65f / 255f, 1f)));
         playerLabel.setPosition(120, GameInfo.HIGTH - 75, Align.center);
     } // createLabel()
 

@@ -5,7 +5,6 @@ package com.sisamoma.sam.pipes;
  */
 
 
-
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -16,10 +15,10 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-
-import java.util.Random;
 import com.sisamoma.sam.helpers.GameInfo;
 import com.sisamoma.sam.helpers.GameManager;
+
+import java.util.Random;
 
 
 public class Pipes {
@@ -34,6 +33,7 @@ public class Pipes {
 
     private float randomY;
     private boolean isSensor;
+
     public Pipes(World world, float x, boolean isSensor) {
         this.world = world;
         this.isSensor = isSensor;
@@ -44,7 +44,7 @@ public class Pipes {
         //Gdx.app.log("Check pipes", "Creato Pipes a x: " + x + " - y: " + randomY);
     }
 
-     private void createPipes(float x, float y){
+    private void createPipes(float x, float y) {
 
         pipe1 = new Sprite(new Texture("stone1.png"));
         pipe2 = new Sprite(new Texture("stone2.png"));
@@ -97,14 +97,14 @@ public class Pipes {
     }
 
     public void drawPipes(SpriteBatch batch) {
-        batch.draw(pipe1, pipe1.getX() - pipe1.getWidth() / 2f, pipe1.getY() - pipe1.getHeight() / 2f );
-        batch.draw(pipe2, pipe2.getX() - pipe2.getWidth() / 2f, pipe2.getY() - pipe2.getHeight() / 2f );
+        batch.draw(pipe1, pipe1.getX() - pipe1.getWidth() / 2f, pipe1.getY() - pipe1.getHeight() / 2f);
+        batch.draw(pipe2, pipe2.getX() - pipe2.getWidth() / 2f, pipe2.getY() - pipe2.getHeight() / 2f);
 
         //Gdx.app.log("Check pipes", "Draw pipe1 a x: " + pipe1.getX() + " - y: " + pipe1.getY());
         //Gdx.app.log("Check pipes", "Draw pipe2 a x: " + pipe2.getX() + " - y: " + pipe2.getY());
     }
 
-    public void updatePipes (){
+    public void updatePipes() {
         pipe1.setPosition(body1.getPosition().x * GameInfo.PPM, body1.getPosition().y * GameInfo.PPM);
         pipe2.setPosition(body2.getPosition().x * GameInfo.PPM, body2.getPosition().y * GameInfo.PPM);
 
@@ -116,7 +116,7 @@ public class Pipes {
         body1.setLinearVelocity(-1f, 0);
         body2.setLinearVelocity(-1f, 0);
         body3.setLinearVelocity(-1f, 0);
-        if(pipe1.getX() + (GameInfo.WIDTH / 2f) + 160f < mainCamera.position.x){
+        if (pipe1.getX() + (GameInfo.WIDTH / 2f) + 160f < mainCamera.position.x) {
             body1.setActive(false);
             body2.setActive(false);
             body3.setActive(false);
@@ -134,8 +134,8 @@ public class Pipes {
     }
 
     private float getRandomY() {
-        float max = (GameInfo.HIGTH)/ 2f + 100f;
-        float min = (GameInfo.HIGTH)/ 2f - 100f;
+        float max = (GameInfo.HIGTH) / 2f + 100f;
+        float min = (GameInfo.HIGTH) / 2f - 100f;
         return random.nextFloat() * (max - min) + min;
     }
 

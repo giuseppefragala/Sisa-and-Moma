@@ -18,7 +18,6 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-
 import com.sisamoma.sam.helpers.GameInfo;
 import com.sisamoma.sam.helpers.GameManager;
 
@@ -33,7 +32,7 @@ public class Player extends Sprite {
     private String playerKoName;
     private String playerAtlasName;
 
-    public Player(World world, float x, float y){
+    public Player(World world, float x, float y) {
         // In the play screen, when starting, shows the choosen player from the menu screen
         super(new Texture(GameManager.getInstance().getPlayerImageName()));
 
@@ -48,26 +47,26 @@ public class Player extends Sprite {
         createAnimation();
     }
 
-    public Body getBody(){
+    public Body getBody() {
         return this.body;
     }
 
     private void createBody() {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-        bodyDef.position.set(getX() / GameInfo.PPM, (getY()  ) / GameInfo.PPM);
+        bodyDef.position.set(getX() / GameInfo.PPM, (getY()) / GameInfo.PPM);
 
         body = world.createBody(bodyDef);
         body.setFixedRotation(true);
 
         Vector2[] vertexArray = new Vector2[6];
 
-        vertexArray[0] = new Vector2(-(0.9f * 1/2f) * getWidth() / GameInfo.PPM, (0.9f * 1/2f) * getHeight()/ GameInfo.PPM); //A
-        vertexArray[1] = new Vector2((0.9f * 1/4f) * getWidth() / GameInfo.PPM, (0.9f * 1/2f) * getHeight() / GameInfo.PPM); //B
-        vertexArray[2] = new Vector2((0.9f * 1/2f) * getWidth() / GameInfo.PPM,(0.9f * 1/6f) * getHeight() / GameInfo.PPM); //C
-        vertexArray[3] = new Vector2((0.9f * 1/2f) * getWidth() / GameInfo.PPM, -(0.9f * 1/6f) * getHeight() / GameInfo.PPM); //D
-        vertexArray[4] = new Vector2((0.9f * 1/4f) * getWidth() / GameInfo.PPM, -(0.9f * 1/2f) * getHeight()/ GameInfo.PPM); //E
-        vertexArray[5] = new Vector2(-(0.9f * 1/2f) * getWidth() / GameInfo.PPM, -(0.9f * 1/2f) * getHeight()/ GameInfo.PPM); //F
+        vertexArray[0] = new Vector2(-(0.9f * 1 / 2f) * getWidth() / GameInfo.PPM, (0.9f * 1 / 2f) * getHeight() / GameInfo.PPM); //A
+        vertexArray[1] = new Vector2((0.9f * 1 / 4f) * getWidth() / GameInfo.PPM, (0.9f * 1 / 2f) * getHeight() / GameInfo.PPM); //B
+        vertexArray[2] = new Vector2((0.9f * 1 / 2f) * getWidth() / GameInfo.PPM, (0.9f * 1 / 6f) * getHeight() / GameInfo.PPM); //C
+        vertexArray[3] = new Vector2((0.9f * 1 / 2f) * getWidth() / GameInfo.PPM, -(0.9f * 1 / 6f) * getHeight() / GameInfo.PPM); //D
+        vertexArray[4] = new Vector2((0.9f * 1 / 4f) * getWidth() / GameInfo.PPM, -(0.9f * 1 / 2f) * getHeight() / GameInfo.PPM); //E
+        vertexArray[5] = new Vector2(-(0.9f * 1 / 2f) * getWidth() / GameInfo.PPM, -(0.9f * 1 / 2f) * getHeight() / GameInfo.PPM); //F
 
         //CircleShape shape = new CircleShape();
         //shape.setRadius((getHeight() / 2f) / GameInfo.PPM);
@@ -104,7 +103,7 @@ public class Player extends Sprite {
 
     //Called when GamePlay screen is activated
     public void drawIdle(SpriteBatch batch) {
-        if(!isAlive) {
+        if (!isAlive) {
             batch.draw(this, getX() - getWidth() / 2f, getY() - getHeight() / 2f);
         }
     }
@@ -112,8 +111,8 @@ public class Player extends Sprite {
 
     // Generate player animation
     public void animatePlayer(SpriteBatch batch) {
-        if(isAlive) {
-            if(GameManager.getInstance().getGameStatus()) {
+        if (isAlive) {
+            if (GameManager.getInstance().getGameStatus()) {
                 elapsedTime += Gdx.graphics.getDeltaTime();
             }
             batch.draw(animation.getKeyFrame(elapsedTime, true), getX() - (getWidth() / 2f), getY() - (getHeight() / 2f));
@@ -130,15 +129,15 @@ public class Player extends Sprite {
         TextureAtlas playerAtlas = new TextureAtlas(playerAtlasName);
 
         // Create the animation of the player based on its atlas
-        animation = new Animation<TextureRegion>(1f/5f, playerAtlas.getRegions()); // 1f/7f = 7 frame al secondo
-    }
-
-    public void setAlive(boolean isAlive) {
-        this.isAlive = isAlive;
+        animation = new Animation<TextureRegion>(1f / 5f, playerAtlas.getRegions()); // 1f/7f = 7 frame al secondo
     }
 
     public boolean getAlive() {
         return isAlive;
+    }
+
+    public void setAlive(boolean isAlive) {
+        this.isAlive = isAlive;
     }
 
     public void playerDied() {

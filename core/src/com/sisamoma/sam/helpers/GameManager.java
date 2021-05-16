@@ -1,8 +1,6 @@
 package com.sisamoma.sam.helpers;
 
 
-import com.badlogic.gdx.Gdx;
-
 /**
  * Created by Giuseppe on 23/02/2018.
  */
@@ -20,18 +18,22 @@ public class GameManager {
 
     private GameManager() {
         this.gameStatus = true;
-        this .shieldActivated = false;
+        this.shieldActivated = false;
+    }
+
+    public static GameManager getInstance() {
+        return instance;
     }
 
     public void incrementIndex() {
         index++;
-        if(index == playersImageNameArray.length){
+        if (index == playersImageNameArray.length) {
             index = 0;
         }
     }
 
     public String getPlayerImageName() {
-        return  playersImageNameArray[index];
+        return playersImageNameArray[index];
     }
 
     public float getRandomY() {
@@ -42,24 +44,20 @@ public class GameManager {
         this.randomY = randomY;
     }
 
-    public void setGameStatus(boolean status){
+    public boolean getGameStatus() {
+        return gameStatus;
+    }
+
+    public void setGameStatus(boolean status) {
         gameStatus = status;
     }
 
-    public boolean getGameStatus(){
-        return  gameStatus;
+    public boolean getPlayerShield() {
+        return shieldActivated;
     }
 
-    public void setPlayerShield(boolean shield){
+    public void setPlayerShield(boolean shield) {
         shieldActivated = shield;
-    }
-
-    public boolean getPlayerShield(){
-        return  shieldActivated;
-    }
-
-    public static GameManager getInstance() {
-        return instance;
     }
 
 

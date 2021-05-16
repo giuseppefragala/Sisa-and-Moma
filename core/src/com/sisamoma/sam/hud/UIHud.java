@@ -5,14 +5,12 @@ package com.sisamoma.sam.hud;
  */
 
 
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-//import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -23,10 +21,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-
 import com.sisamoma.sam.GameMain;
 import com.sisamoma.sam.helpers.GameInfo;
-
 import com.sisamoma.sam.helpers.GameManager;
 import com.sisamoma.sam.scenes.GamePlay;
 import com.sisamoma.sam.scenes.MainMenu;
@@ -41,10 +37,11 @@ public class UIHud {
     private ImageButton retryBtn, quitBtn, gamePlayBtn, gamePauseBtn;
     private int score;
     private boolean gameStatus;
+
     public UIHud(GameMain game) {
         this.game = game;
         gameViewport = new FitViewport(GameInfo.WIDTH, GameInfo.HIGTH, new OrthographicCamera());
-        stage = new Stage(gameViewport,game.getBatch());
+        stage = new Stage(gameViewport, game.getBatch());
         createLabel();
         stage.addActor(scoreLabel);
         gameStatus = true;
@@ -63,20 +60,20 @@ public class UIHud {
         //* this code in case freetype doesn't work
         //BitmapFont font = new BitmapFont(Gdx.files.internal("myfont.fnt"));
         //*/
-        scoreLabel = new Label(String.valueOf(score), new Label.LabelStyle(font, new Color(204f/255f, 65f/255f, 65f/255f, 1f)));
+        scoreLabel = new Label(String.valueOf(score), new Label.LabelStyle(font, new Color(204f / 255f, 65f / 255f, 65f / 255f, 1f)));
         scoreLabel.setPosition(GameInfo.WIDTH / 2f - scoreLabel.getWidth() / 2f - 330, GameInfo.HIGTH / 2F + 180, Align.left);
     } // createLabel()
 
     public void showPlayButtons() {
 
-        if(gamePlayBtn != null){
+        if (gamePlayBtn != null) {
             gamePlayBtn.remove();
         }
 
-        if(gameStatus) {
+        if (gameStatus) {
             gamePlayBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("gamePause.png"))));
             game.resume();
-        }else{
+        } else {
             gamePlayBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("gamePlay.png"))));
             game.pause();
         }
@@ -140,7 +137,6 @@ public class UIHud {
     public Stage getStage() {
         return this.stage;
     }
-
 
 
 } // UIHud
