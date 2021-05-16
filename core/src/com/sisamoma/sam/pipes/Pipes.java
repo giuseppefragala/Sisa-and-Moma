@@ -6,7 +6,6 @@ package com.sisamoma.sam.pipes;
 
 
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -135,8 +134,8 @@ public class Pipes {
     }
 
     private float getRandomY() {
-        float max = (GameInfo.HIGHT)/ 2f + 100f;
-        float min = (GameInfo.HIGHT)/ 2f - 100f;
+        float max = (GameInfo.HIGTH)/ 2f + 100f;
+        float min = (GameInfo.HIGTH)/ 2f - 100f;
         return random.nextFloat() * (max - min) + min;
     }
 

@@ -112,8 +112,8 @@ public class Coins extends Sprite {
 
     // Sostituito da GameManager.getInstance().getRandomY();
 /*    float getRandomY() {
-        float max = (GameInfo.HIGHT)/ 2f + 20;
-        float min = (GameInfo.HIGHT)/ 2f - 20;
+        float max = (GameInfo.HIGTH)/ 2f + 20;
+        float min = (GameInfo.HIGTH)/ 2f - 20;
         return random.nextFloat() * (max - min) + min;
     }*/
 

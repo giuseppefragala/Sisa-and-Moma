@@ -8,7 +8,7 @@ package com.sisamoma.sam.helpers;
 
 public class GameInfo {
     public static final int WIDTH = 800;
-    public static final int HIGHT = 480;
+    public static final int HIGTH = 480;
     public static final float PPM = 100f;
     public static final float BACKGROUND_SPEED = 2f;
     public static final float GROUND_SPEED = 2f;

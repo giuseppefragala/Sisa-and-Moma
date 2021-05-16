@@ -29,8 +29,6 @@ import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import static com.badlogic.gdx.Gdx.app;
-
 import com.sisamoma.sam.GameMain;
 import com.sisamoma.sam.coins.Coins;
 import com.sisamoma.sam.ground.GroundBody;
@@ -41,7 +39,7 @@ import com.sisamoma.sam.pipes.Pipes;
 import com.sisamoma.sam.players.Player;
 import com.sisamoma.sam.top.TopBody;
 
-import java.time.LocalDateTime;
+import static com.badlogic.gdx.Gdx.app;
 
 
 public class GamePlay implements Screen, ContactListener {
@@ -85,25 +83,25 @@ public class GamePlay implements Screen, ContactListener {
 
     private ParticleEffect pe;
 
-    public GamePlay(GameMain game){
+    public GamePlay(GameMain game) {
 
         this.game = game;
 
         pe = new ParticleEffect();
-        pe.load(Gdx.files.internal("Particles.p"),Gdx.files.internal(""));
-        pe.getEmitters().first().setPosition(GameInfo.WIDTH / 2f,GameInfo.HIGHT / 2f);
+        pe.load(Gdx.files.internal("Particles.p"), Gdx.files.internal(""));
+        pe.getEmitters().first().setPosition(GameInfo.WIDTH / 2f, GameInfo.HIGTH / 2f);
         pe.start();
 
         sa = new SequenceAction();
         run = new RunnableAction();
 
-        mainCamera = new OrthographicCamera(GameInfo.WIDTH,GameInfo.HIGHT);
-        mainCamera.position.set(GameInfo.WIDTH / 2f,GameInfo.HIGHT / 2f, 0);
-        gameViewport = new FitViewport(GameInfo.WIDTH, GameInfo.HIGHT, mainCamera);
+        mainCamera = new OrthographicCamera(GameInfo.WIDTH, GameInfo.HIGTH);
+        mainCamera.position.set(GameInfo.WIDTH / 2f, GameInfo.HIGTH / 2f, 0);
+        gameViewport = new FitViewport(GameInfo.WIDTH, GameInfo.HIGTH, mainCamera);
 
         debugCamera = new OrthographicCamera();
-        debugCamera.setToOrtho(false, GameInfo.WIDTH / GameInfo.PPM, GameInfo.HIGHT / GameInfo.PPM);
-        debugCamera.position.set(GameInfo.WIDTH / 2f, GameInfo.HIGHT / 2f, 0);
+        debugCamera.setToOrtho(false, GameInfo.WIDTH / GameInfo.PPM, GameInfo.HIGTH / GameInfo.PPM);
+        debugCamera.position.set(GameInfo.WIDTH / 2f, GameInfo.HIGTH / 2f, 0);
         debugRenderer = new Box2DDebugRenderer();
 
         hud = new UIHud(game);
@@ -114,9 +112,9 @@ public class GamePlay implements Screen, ContactListener {
         world = new World(new Vector2(0, GameInfo.GAMEPLAY_WORLD_G_ACCELERATION), true);
         world.setContactListener(this);
 
-        player = new Player(world, GameInfo.WIDTH / 2f - 30f, GameInfo.HIGHT / 2f);
+        player = new Player(world, GameInfo.WIDTH / 2f - 30f, GameInfo.HIGTH / 2f);
         groundBody = new GroundBody(world, grounds.get(0));
-        topBody = new TopBody(world,grounds.get(0));
+        topBody = new TopBody(world, grounds.get(0));
 
         scoreSound = Gdx.audio.newSound(Gdx.files.internal("Score.mp3"));
         coinSound = Gdx.audio.newSound(Gdx.files.internal("Coin.mp3"));
@@ -128,7 +126,7 @@ public class GamePlay implements Screen, ContactListener {
         prefs = app.getPreferences("Data");
         musicStatus = prefs.getBoolean("MusicStatus");
         soundStatus = prefs.getBoolean("SoundStatus");
-        if(musicStatus) {
+        if (musicStatus) {
             backgroundMusic.play();
         }
 
@@ -138,8 +136,8 @@ public class GamePlay implements Screen, ContactListener {
 
 
     private void checkForFirstTouch() {
-        if(!firstTouch) {
-            if(Gdx.input.justTouched()) {
+        if (!firstTouch) {
+            if (Gdx.input.justTouched()) {
                 firstTouch = true;
                 player.activatePlayer();
                 createAllPipes();
@@ -171,9 +169,9 @@ public class GamePlay implements Screen, ContactListener {
         hud.getStage().addAction(Actions.forever(sa));
     } // createAllPipes()
 
-    private void playerSwim(){
-        if(Gdx.input.justTouched()) {
-            if(soundStatus) {
+    private void playerSwim() {
+        if (Gdx.input.justTouched()) {
+            if (soundStatus) {
                 playerBubbleSound.play();
             }
             player.playerSwim();
@@ -201,23 +199,23 @@ public class GamePlay implements Screen, ContactListener {
         }
     }
 
-    private void drawBackgrounds(SpriteBatch batch){
-        for(Sprite s : backgrounds){
+    private void drawBackgrounds(SpriteBatch batch) {
+        for (Sprite s : backgrounds) {
             batch.draw(s, s.getX(), s.getY());
         }
     }
 
-    void drawGrounds(SpriteBatch batch){
-        for(Sprite s : grounds){
+    void drawGrounds(SpriteBatch batch) {
+        for (Sprite s : grounds) {
             batch.draw(s, s.getX(), s.getY());
         }
     }
 
     private void moveBackgrounds() {
-        for(Sprite background : backgrounds){
+        for (Sprite background : backgrounds) {
             float x1 = background.getX() - GameInfo.BACKGROUND_SPEED;
             background.setPosition(x1, background.getY());
-            if(background.getX() + GameInfo.WIDTH + (background.getWidth() / 2f ) < mainCamera.position.x){
+            if (background.getX() + GameInfo.WIDTH + (background.getWidth() / 2f) < mainCamera.position.x) {
                 float x2 = background.getX() + background.getWidth() * backgrounds.size;
                 background.setPosition(x2, background.getY());
             }
@@ -226,10 +224,10 @@ public class GamePlay implements Screen, ContactListener {
     } // moveBackgrounds()
 
     void moveGrounds() {
-        for(Sprite ground : grounds){
+        for (Sprite ground : grounds) {
             float x1 = ground.getX() - GameInfo.GROUND_SPEED;
             ground.setPosition(x1, ground.getY());
-            if(ground.getX() + GameInfo.WIDTH + (ground.getWidth() / 2f ) < mainCamera.position.x){
+            if (ground.getX() + GameInfo.WIDTH + (ground.getWidth() / 2f) < mainCamera.position.x) {
                 float x2 = ground.getX() + ground.getWidth() * backgrounds.size;
                 ground.setPosition(x2, ground.getY());
             }
@@ -245,26 +243,26 @@ public class GamePlay implements Screen, ContactListener {
         pipesArray.add(pipe);
     }
 
-    private void drawPipes(SpriteBatch batch){
-        for(Pipes pipe : pipesArray){
+    private void drawPipes(SpriteBatch batch) {
+        for (Pipes pipe : pipesArray) {
             pipe.drawPipes(batch);
         }
     }
 
-    private void updatePipes(){
-        for(Pipes pipe : pipesArray){
+    private void updatePipes() {
+        for (Pipes pipe : pipesArray) {
             pipe.updatePipes();
         }
     }
 
-    private void movePipes(){
-        for(Pipes pipe : pipesArray){
+    private void movePipes() {
+        for (Pipes pipe : pipesArray) {
             pipe.movePipes();
         }
     }
 
-    private void stopPipes(){
-        for(Pipes pipe : pipesArray){
+    private void stopPipes() {
+        for (Pipes pipe : pipesArray) {
             pipe.stopPipes();
         }
     }
@@ -277,26 +275,26 @@ public class GamePlay implements Screen, ContactListener {
         coinsArray.add(coin);
     }
 
-    private void drawCoin(SpriteBatch batch){
-        for(Coins coin : coinsArray){
+    private void drawCoin(SpriteBatch batch) {
+        for (Coins coin : coinsArray) {
             coin.animateCoin(batch);
         }
     }
 
-    private void updateCoin(){
-        for(Coins coin : coinsArray){
+    private void updateCoin() {
+        for (Coins coin : coinsArray) {
             coin.updateCoin();
         }
     }
 
-    private void moveCoin(){
-        for(Coins coin : coinsArray){
+    private void moveCoin() {
+        for (Coins coin : coinsArray) {
             coin.moveCoin();
         }
     }
 
-    private void stopCoin(){
-        for(Coins coin : coinsArray){
+    private void stopCoin() {
+        for (Coins coin : coinsArray) {
             coin.stopCoin();
         }
     }
@@ -318,7 +316,7 @@ public class GamePlay implements Screen, ContactListener {
 
         int highScore = prefs.getInteger("Score");
 
-        if(highScore < hud.getScore()) {
+        if (highScore < hud.getScore()) {
             prefs.putInteger("Score", hud.getScore());
             prefs.flush();
         }
@@ -360,29 +358,29 @@ public class GamePlay implements Screen, ContactListener {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         game.getBatch().begin();
-            //--------------------------------------------------------------------------------------
-            //drawGrounds(game.getBatch());
-            drawBackgrounds(game.getBatch());
+        //--------------------------------------------------------------------------------------
+        //drawGrounds(game.getBatch());
+        drawBackgrounds(game.getBatch());
 
-            player.drawIdle(game.getBatch());
-            player.animatePlayer(game.getBatch());
+        player.drawIdle(game.getBatch());
+        player.animatePlayer(game.getBatch());
 
-            //drawing the com.sisamoma.sam.pipes
-            drawPipes(game.getBatch());
+        //drawing the com.sisamoma.sam.pipes
+        drawPipes(game.getBatch());
 
-            //drawing the com.sisamoma.sam.coins
-            drawCoin(game.getBatch());
+        //drawing the com.sisamoma.sam.coins
+        drawCoin(game.getBatch());
 
-            pe.draw(game.getBatch());
-            pe.setPosition(player.getX() + player.getWidth()*(0.7f),player.getY() + 50f);
-            //--------------------------------------------------------------------------------------
+        pe.draw(game.getBatch());
+        pe.setPosition(player.getX() + player.getWidth() * (0.7f), player.getY() + 50f);
+        //--------------------------------------------------------------------------------------
         game.getBatch().end();
 
-        if (pe.isComplete()){
+        if (pe.isComplete()) {
             pe.reset();
         }
 
-        if(GameManager.getInstance().getGameStatus()) {
+        if (GameManager.getInstance().getGameStatus()) {
             player.updatePlayer();
             update(delta);
             world.step(Gdx.graphics.getDeltaTime(), 6, 2);
@@ -391,14 +389,14 @@ public class GamePlay implements Screen, ContactListener {
         hud.getStage().draw();
         hud.getStage().act();
 
-            // comment this to hide debugrender shape's line
-            //debugRenderer.render(world, debugCamera.combined);
+        // comment this to hide debugrender shape's line
+        //debugRenderer.render(world, debugCamera.combined);
 
     } //render
 
     @Override
     public void resize(int width, int height) {
-        gameViewport.update(width,height);
+        gameViewport.update(width, height);
     }
 
     @Override
@@ -408,7 +406,7 @@ public class GamePlay implements Screen, ContactListener {
 
     @Override
     public void resume() {
-        if(canRestartSa) {
+        if (canRestartSa) {
             sa.restart();
             canRestartSa = false;
         }
@@ -427,19 +425,19 @@ public class GamePlay implements Screen, ContactListener {
 
     @Override
     public void dispose() {
-        for (Sprite background : backgrounds){
+        for (Sprite background : backgrounds) {
             background.getTexture().dispose();
         }
 
-        for (Sprite ground : grounds){
+        for (Sprite ground : grounds) {
             ground.getTexture().dispose();
         }
 
-        for (Pipes pipe : pipesArray){
+        for (Pipes pipe : pipesArray) {
             pipe.disposeAll();
         }
 
-        for (Coins coin : coinsArray){
+        for (Coins coin : coinsArray) {
             coin.disposeAll();
         }
 
@@ -455,7 +453,7 @@ public class GamePlay implements Screen, ContactListener {
 
     @Override
     public void beginContact(Contact contact) {
-        if(!GameManager.getInstance().getPlayerShield()) {
+        if (!GameManager.getInstance().getPlayerShield()) {
             Fixture body1, body2;
             if (contact.getFixtureA().getUserData() == "Player") {
                 body1 = contact.getFixtureA();

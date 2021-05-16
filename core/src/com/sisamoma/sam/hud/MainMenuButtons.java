@@ -29,7 +29,6 @@ import com.sisamoma.sam.helpers.GameInfo;
 import com.sisamoma.sam.helpers.GameManager;
 import com.sisamoma.sam.scenes.GamePlay;
 import com.sisamoma.sam.scenes.HighScores;
-import com.sisamoma.sam.scenes.MainMenu;
 
 
 public class MainMenuButtons {
@@ -51,7 +50,7 @@ public class MainMenuButtons {
         prefs = Gdx.app.getPreferences("Data");
 
 
-        gameViewport = new FitViewport(GameInfo.WIDTH, GameInfo.HIGHT, new OrthographicCamera());
+        gameViewport = new FitViewport(GameInfo.WIDTH, GameInfo.HIGTH, new OrthographicCamera());
         stage = new Stage(gameViewport, game.getBatch());
 
         createAndPositionButtons();
@@ -73,8 +72,8 @@ public class MainMenuButtons {
         playBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("Play.png"))));
         scoreBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("Score.png"))));
 
-        playBtn.setPosition(75, GameInfo.HIGHT / 2f , Align.center);
-        scoreBtn.setPosition(GameInfo.WIDTH - 75, GameInfo.HIGHT / 2f , Align.center);
+        playBtn.setPosition(75, GameInfo.HIGTH / 2f , Align.center);
+        scoreBtn.setPosition(GameInfo.WIDTH - 75, GameInfo.HIGTH / 2f , Align.center);
 
         playBtn.addListener(new ChangeListener() {
             @Override
@@ -157,7 +156,7 @@ public class MainMenuButtons {
             changePlayerBtn.remove();
         }
         changePlayerBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture(GameManager.getInstance().getPlayerImageName()))));
-        changePlayerBtn.setPosition(GameInfo.WIDTH - 75, GameInfo.HIGHT - 75, Align.center);
+        changePlayerBtn.setPosition(GameInfo.WIDTH - 75, GameInfo.HIGTH - 75, Align.center);
 
         playerLabel.setText(GameManager.getInstance().getPlayerImageName().substring(0,4).toUpperCase());
 
@@ -204,7 +203,7 @@ public class MainMenuButtons {
         //BitmapFont font = new BitmapFont(Gdx.files.internal("myfont.fnt"));
         //*/
         playerLabel = new Label("Sisa", new Label.LabelStyle(font, new Color(204f/255f, 65f/255f, 65f/255f, 1f)));
-        playerLabel.setPosition(120, GameInfo.HIGHT - 75, Align.center);
+        playerLabel.setPosition(120, GameInfo.HIGTH - 75, Align.center);
     } // createLabel()
 
 } // main menu buttons

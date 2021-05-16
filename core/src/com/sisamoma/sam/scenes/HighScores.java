@@ -5,8 +5,6 @@ package com.sisamoma.sam.scenes;
  */
 
 
-
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
@@ -45,13 +43,13 @@ public class HighScores implements Screen {
     private Label scoreLabel;
     private Music backgroundMusic;
 
-    public HighScores(GameMain game){
+    public HighScores(GameMain game) {
         this.game = game;
 
         mainCamera = new OrthographicCamera();
-        mainCamera.setToOrtho(false, GameInfo.WIDTH, GameInfo.HIGHT);
-        mainCamera.position.set(GameInfo.WIDTH / 2f, GameInfo.HIGHT / 2f, 0);
-        gameViewport = new FitViewport(GameInfo.WIDTH, GameInfo.HIGHT, mainCamera);
+        mainCamera.setToOrtho(false, GameInfo.WIDTH, GameInfo.HIGTH);
+        mainCamera.position.set(GameInfo.WIDTH / 2f, GameInfo.HIGTH / 2f, 0);
+        gameViewport = new FitViewport(GameInfo.WIDTH, GameInfo.HIGTH, mainCamera);
         stage = new Stage(gameViewport, game.getBatch());
         background = new Texture("background_hs.jpg");
         backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("highscore.mp3"));
@@ -85,7 +83,7 @@ public class HighScores implements Screen {
 
         Preferences prefs = app.getPreferences("Data");
         boolean musicStatus = prefs.getBoolean("MusicStatus");
-        if(musicStatus) {
+        if (musicStatus) {
             backgroundMusic.play();
         }
 
@@ -120,7 +118,7 @@ public class HighScores implements Screen {
 
     private void showScore() {
 
-        if(scoreLabel != null) {
+        if (scoreLabel != null) {
             return;
         }
 
@@ -128,7 +126,7 @@ public class HighScores implements Screen {
         FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("Mali-Bold.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 80;
-        parameter.shadowColor= Color.BLUE;
+        parameter.shadowColor = Color.BLUE;
         parameter.shadowOffsetX = 10;
         parameter.shadowOffsetY = 6;
         BitmapFont fontScoreLabel = fontGenerator.generateFont(parameter);
@@ -137,22 +135,22 @@ public class HighScores implements Screen {
         //Color color =  new Color(204.0f, 65.0f, 65.0f, 1.0f);
         //BitmapFont font = new BitmapFont(Gdx.files.internal("myfont.fnt"));
         //*/
-        scoreLabel = new Label("High Scores", new Label.LabelStyle(fontScoreLabel, new Color(204f/255f, 65f/255f, 65f/255f, 1f)));
-        scoreLabel.setPosition(GameInfo.WIDTH / 2f, GameInfo.HIGHT /2f + 150f, Align.center);
+        scoreLabel = new Label("High Scores", new Label.LabelStyle(fontScoreLabel, new Color(204f / 255f, 65f / 255f, 65f / 255f, 1f)));
+        scoreLabel.setPosition(GameInfo.WIDTH / 2f, GameInfo.HIGTH / 2f + 150f, Align.center);
         stage.addActor(scoreLabel);
 
         //parameter.size = 150;
         //BitmapFont fontScoreValue = fontGenerator.generateFont(parameter);
         Preferences prefs = Gdx.app.getPreferences("Data");
-        scoreLabel = new Label(String.valueOf(prefs.getInteger("Score")), new Label.LabelStyle(fontScoreLabel, new Color(204f/255f, 65f/255f, 65f/255f, 1f)));
-        scoreLabel.setPosition(GameInfo.WIDTH / 2f, GameInfo.HIGHT /2f , Align.center);
+        scoreLabel = new Label(String.valueOf(prefs.getInteger("Score")), new Label.LabelStyle(fontScoreLabel, new Color(204f / 255f, 65f / 255f, 65f / 255f, 1f)));
+        scoreLabel.setPosition(GameInfo.WIDTH / 2f, GameInfo.HIGTH / 2f, Align.center);
         stage.addActor(scoreLabel);
 
     } // showScore()
 
     private void createAndPositionButtons() {
         backBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("Back.png"))));
-        backBtn.setPosition(GameInfo.WIDTH / 2f , GameInfo.HIGHT / 2f - 150f, Align.center);
+        backBtn.setPosition(GameInfo.WIDTH / 2f, GameInfo.HIGTH / 2f - 150f, Align.center);
 
         backBtn.addListener(new ChangeListener() {
             @Override

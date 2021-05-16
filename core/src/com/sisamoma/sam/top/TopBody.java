@@ -33,7 +33,7 @@ public class TopBody {
     private void createTopBody(Sprite top) {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.StaticBody;
-        bodyDef.position.set(top.getWidth() / GameInfo.PPM, (GameInfo.HIGHT + 10f) / GameInfo.PPM);
+        bodyDef.position.set(top.getWidth() / GameInfo.PPM, (GameInfo.HIGTH + 10f) / GameInfo.PPM);
 
         body = world.createBody(bodyDef);
 

@@ -6,7 +6,6 @@ package com.sisamoma.sam.hud;
 
 
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -44,7 +43,7 @@ public class UIHud {
     private boolean gameStatus;
     public UIHud(GameMain game) {
         this.game = game;
-        gameViewport = new FitViewport(GameInfo.WIDTH, GameInfo.HIGHT, new OrthographicCamera());
+        gameViewport = new FitViewport(GameInfo.WIDTH, GameInfo.HIGTH, new OrthographicCamera());
         stage = new Stage(gameViewport,game.getBatch());
         createLabel();
         stage.addActor(scoreLabel);
@@ -65,7 +64,7 @@ public class UIHud {
         //BitmapFont font = new BitmapFont(Gdx.files.internal("myfont.fnt"));
         //*/
         scoreLabel = new Label(String.valueOf(score), new Label.LabelStyle(font, new Color(204f/255f, 65f/255f, 65f/255f, 1f)));
-        scoreLabel.setPosition(GameInfo.WIDTH / 2f - scoreLabel.getWidth() / 2f - 330, GameInfo.HIGHT / 2F + 180, Align.left);
+        scoreLabel.setPosition(GameInfo.WIDTH / 2f - scoreLabel.getWidth() / 2f - 330, GameInfo.HIGTH / 2F + 180, Align.left);
     } // createLabel()
 
     public void showPlayButtons() {
@@ -101,8 +100,8 @@ public class UIHud {
         retryBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("Retry.png"))));
         quitBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("Quit.png"))));
 
-        retryBtn.setPosition(GameInfo.WIDTH / 2f - (retryBtn.getWidth() / 2f) - 100f, GameInfo.HIGHT / 2f - 55f);
-        quitBtn.setPosition(GameInfo.WIDTH / 2f - (quitBtn.getWidth() / 2f) + 100f, GameInfo.HIGHT / 2f - 50f);
+        retryBtn.setPosition(GameInfo.WIDTH / 2f - (retryBtn.getWidth() / 2f) - 100f, GameInfo.HIGTH / 2f - 55f);
+        quitBtn.setPosition(GameInfo.WIDTH / 2f - (quitBtn.getWidth() / 2f) + 100f, GameInfo.HIGTH / 2f - 50f);
 
         retryBtn.addListener(new ChangeListener() {
             @Override

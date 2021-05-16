@@ -36,10 +36,10 @@ public class MainMenu implements Screen {
         this.game = game;
 
         mainCamera = new OrthographicCamera();
-        mainCamera.setToOrtho(false, GameInfo.WIDTH, GameInfo.HIGHT);
-        mainCamera.position.set(GameInfo.WIDTH / 2f, GameInfo.HIGHT / 2f, 0);
+        mainCamera.setToOrtho(false, GameInfo.WIDTH, GameInfo.HIGTH);
+        mainCamera.position.set(GameInfo.WIDTH / 2f, GameInfo.HIGTH / 2f, 0);
 
-        gameViewport = new FitViewport(GameInfo.WIDTH, GameInfo.HIGHT, mainCamera);
+        gameViewport = new FitViewport(GameInfo.WIDTH, GameInfo.HIGTH, mainCamera);
 
         background = new Texture("Background_menu.png");
         mainMenuButtons = new MainMenuButtons(game);
