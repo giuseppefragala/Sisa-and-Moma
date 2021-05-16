@@ -1,34 +1,37 @@
 package com.sisamoma.sam.helpers;
 
 
+import com.badlogic.gdx.Gdx;
+
 /**
  * Created by Giuseppe on 23/02/2018.
  */
 
-
-import static com.badlogic.gdx.math.MathUtils.random;
-
-
 public class GameManager {
     private static final GameManager instance = new GameManager();
 
-    private final String[] players = {"sisa.png", "moma.png"};
+    private final String[] playersImageNameArray = {"sisa.png", "moma.png"};
     private int index = 1;
 
     private float randomY;
 
+    private boolean gameStatus;
+    private boolean shieldActivated;
+
     private GameManager() {
+        this.gameStatus = true;
+        this .shieldActivated = false;
     }
 
     public void incrementIndex() {
         index++;
-        if(index == players.length){
+        if(index == playersImageNameArray.length){
             index = 0;
         }
     }
 
-    public String getPlayer() {
-        return  players[index];
+    public String getPlayerImageName() {
+        return  playersImageNameArray[index];
     }
 
     public float getRandomY() {
@@ -39,7 +42,25 @@ public class GameManager {
         this.randomY = randomY;
     }
 
+    public void setGameStatus(boolean status){
+        gameStatus = status;
+    }
+
+    public boolean getGameStatus(){
+        return  gameStatus;
+    }
+
+    public void setPlayerShield(boolean shield){
+        shieldActivated = shield;
+    }
+
+    public boolean getPlayerShield(){
+        return  shieldActivated;
+    }
+
     public static GameManager getInstance() {
         return instance;
     }
+
+
 }

@@ -17,6 +17,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+//import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -42,7 +43,7 @@ public class HighScores implements Screen {
     private Viewport gameViewport;
     private ImageButton backBtn;
     private Label scoreLabel;
-    Music backgroundMusic;
+    private Music backgroundMusic;
 
     public HighScores(GameMain game){
         this.game = game;
@@ -117,31 +118,39 @@ public class HighScores implements Screen {
         backgroundMusic.dispose();
     }
 
-    void showScore() {
+    private void showScore() {
 
         if(scoreLabel != null) {
             return;
         }
 
         // freetype doesn't work in html version
-        FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("GILLUBCD.TTF"));
+        FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("Mali-Bold.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 80;
-        BitmapFont font = fontGenerator.generateFont(parameter);
+        parameter.shadowColor= Color.BLUE;
+        parameter.shadowOffsetX = 10;
+        parameter.shadowOffsetY = 6;
+        BitmapFont fontScoreLabel = fontGenerator.generateFont(parameter);
 
+        //* this lines of code are used in case freetype doesn't work
+        //Color color =  new Color(204.0f, 65.0f, 65.0f, 1.0f);
+        //BitmapFont font = new BitmapFont(Gdx.files.internal("myfont.fnt"));
+        //*/
+        scoreLabel = new Label("High Scores", new Label.LabelStyle(fontScoreLabel, new Color(204f/255f, 65f/255f, 65f/255f, 1f)));
+        scoreLabel.setPosition(GameInfo.WIDTH / 2f, GameInfo.HIGHT /2f + 150f, Align.center);
+        stage.addActor(scoreLabel);
 
-        /* this lines of code are used in case freetype doesn't work
-        Color color =  new Color(204.0f, 65.0f, 65.0f, 1.0f);
-        BitmapFont font = new BitmapFont(Gdx.files.internal("myfont.fnt"));
-        */
+        //parameter.size = 150;
+        //BitmapFont fontScoreValue = fontGenerator.generateFont(parameter);
         Preferences prefs = Gdx.app.getPreferences("Data");
-        scoreLabel = new Label(String.valueOf(prefs.getInteger("Score")), new Label.LabelStyle(font, new Color(204f/255f, 65f/255f, 65f/255f, 1f)));
-        scoreLabel.setPosition(GameInfo.WIDTH / 2f, GameInfo.HIGHT /2f + 50f, Align.center);
+        scoreLabel = new Label(String.valueOf(prefs.getInteger("Score")), new Label.LabelStyle(fontScoreLabel, new Color(204f/255f, 65f/255f, 65f/255f, 1f)));
+        scoreLabel.setPosition(GameInfo.WIDTH / 2f, GameInfo.HIGHT /2f , Align.center);
         stage.addActor(scoreLabel);
 
     } // showScore()
 
-    void createAndPositionButtons() {
+    private void createAndPositionButtons() {
         backBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("Back.png"))));
         backBtn.setPosition(GameInfo.WIDTH / 2f , GameInfo.HIGHT / 2f - 150f, Align.center);
 
@@ -149,7 +158,10 @@ public class HighScores implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 game.setScreen(new MainMenu(game));
-                //showScore();
+                //Ritorna al menu principale
+
+                stage.dispose();
+                dispose();
             }
         });
     } // createAndPositionButtons()

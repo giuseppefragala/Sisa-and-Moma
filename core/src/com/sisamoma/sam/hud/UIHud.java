@@ -6,12 +6,14 @@ package com.sisamoma.sam.hud;
 
 
 
+import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+//import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -26,6 +28,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.sisamoma.sam.GameMain;
 import com.sisamoma.sam.helpers.GameInfo;
 
+import com.sisamoma.sam.helpers.GameManager;
 import com.sisamoma.sam.scenes.GamePlay;
 import com.sisamoma.sam.scenes.MainMenu;
 
@@ -36,33 +39,63 @@ public class UIHud {
     private Stage stage;
     private Viewport gameViewport;
     private Label scoreLabel;
-    private ImageButton retryBtn, quitBtn;
+    private ImageButton retryBtn, quitBtn, gamePlayBtn, gamePauseBtn;
     private int score;
-
+    private boolean gameStatus;
     public UIHud(GameMain game) {
         this.game = game;
         gameViewport = new FitViewport(GameInfo.WIDTH, GameInfo.HIGHT, new OrthographicCamera());
         stage = new Stage(gameViewport,game.getBatch());
         createLabel();
         stage.addActor(scoreLabel);
+        gameStatus = true;
     }
 
-    void createLabel() {
+    private void createLabel() {
 
 
         // html version doesn't work with freetype
-        FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("GILSANUB.TTF"));
+        FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("Mali-Bold.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 80;
         BitmapFont font = fontGenerator.generateFont(parameter);
 
 
-        /* this code in case freetype doesn't work
-        BitmapFont font = new BitmapFont(Gdx.files.internal("myfont.fnt"));
-        */
+        //* this code in case freetype doesn't work
+        //BitmapFont font = new BitmapFont(Gdx.files.internal("myfont.fnt"));
+        //*/
         scoreLabel = new Label(String.valueOf(score), new Label.LabelStyle(font, new Color(204f/255f, 65f/255f, 65f/255f, 1f)));
         scoreLabel.setPosition(GameInfo.WIDTH / 2f - scoreLabel.getWidth() / 2f - 330, GameInfo.HIGHT / 2F + 180, Align.left);
     } // createLabel()
+
+    public void showPlayButtons() {
+
+        if(gamePlayBtn != null){
+            gamePlayBtn.remove();
+        }
+
+        if(gameStatus) {
+            gamePlayBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("gamePause.png"))));
+            game.resume();
+        }else{
+            gamePlayBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("gamePlay.png"))));
+            game.pause();
+        }
+
+        gamePlayBtn.setPosition(75, 75, Align.center);
+
+        gamePlayBtn.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                gameStatus = !gameStatus;
+                GameManager.getInstance().setGameStatus(gameStatus);
+                showPlayButtons();
+            }
+        });
+
+        stage.addActor(gamePlayBtn);
+    } // showPlayButtons()
+
 
     public void createButtons() {
         retryBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("Retry.png"))));

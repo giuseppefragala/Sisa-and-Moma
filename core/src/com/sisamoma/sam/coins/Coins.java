@@ -5,24 +5,24 @@ package com.sisamoma.sam.coins;
  */
 
 
-        import com.badlogic.gdx.Gdx;
-        import com.badlogic.gdx.graphics.OrthographicCamera;
-        import com.badlogic.gdx.graphics.g2d.Animation;
-        import com.badlogic.gdx.graphics.g2d.Sprite;
-        import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-        import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-        import com.badlogic.gdx.graphics.g2d.TextureRegion;
-        import com.badlogic.gdx.physics.box2d.Body;
-        import com.badlogic.gdx.physics.box2d.BodyDef;
-        import com.badlogic.gdx.physics.box2d.Fixture;
-        import com.badlogic.gdx.physics.box2d.FixtureDef;
-        import com.badlogic.gdx.physics.box2d.PolygonShape;
-        import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.World;
 
-        import com.sisamoma.sam.helpers.GameInfo;
-        import com.sisamoma.sam.helpers.GameManager;
+import com.sisamoma.sam.helpers.GameInfo;
+import com.sisamoma.sam.helpers.GameManager;
 
-        import static com.badlogic.gdx.math.MathUtils.random;
+import static com.badlogic.gdx.math.MathUtils.random;
 
 
 public class Coins extends Sprite {
@@ -41,7 +41,7 @@ public class Coins extends Sprite {
         createCoin(x, GameManager.getInstance().getRandomY());
     }
 
-    void createCoin(float x, float y) {
+    private void createCoin(float x, float y) {
 
         createAnimation();
 
@@ -73,12 +73,14 @@ public class Coins extends Sprite {
 
     public void animateCoin(SpriteBatch batch) {
         //if(isAlive) {
-        elapsedTime += Gdx.graphics.getDeltaTime();
+        if(GameManager.getInstance().getGameStatus()) {
+            elapsedTime += Gdx.graphics.getDeltaTime();
+        }
         batch.draw(animation.getKeyFrame(elapsedTime,true), getX() - (getWidth() / 2f), getY() - (getHeight() / 2f) );
         //}
     }
 
-    void createAnimation() {
+    private void createAnimation() {
         TextureAtlas coinAtlas = new TextureAtlas("coins.atlas");
         animation = new Animation<TextureRegion>(1f/12f, coinAtlas.getRegions()); // 1f/7f = 7 frame al secondo
     }

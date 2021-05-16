@@ -35,9 +35,9 @@ public class Player extends Sprite {
 
     public Player(World world, float x, float y){
         // In the play screen, when starting, shows the choosen player from the menu screen
-        super(new Texture(GameManager.getInstance().getPlayer()));
+        super(new Texture(GameManager.getInstance().getPlayerImageName()));
 
-        playerName = GameManager.getInstance().getPlayer();
+        playerName = GameManager.getInstance().getPlayerImageName();
         playerKoName = playerName.substring(0, playerName.length() - 4) + "Ko.png";
         // Set the picture for the player when get down
         playerDead = new Texture(playerKoName);
@@ -48,7 +48,11 @@ public class Player extends Sprite {
         createAnimation();
     }
 
-    void createBody() {
+    public Body getBody(){
+        return this.body;
+    }
+
+    private void createBody() {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         bodyDef.position.set(getX() / GameInfo.PPM, (getY()  ) / GameInfo.PPM);
@@ -89,6 +93,7 @@ public class Player extends Sprite {
         body.setActive(true);
     }
 
+    //The opposite of stopPlayer
     public void playerSwim() {
         body.setLinearVelocity(GameInfo.PLAYER_LINEAR_VELOCITY_X, GameInfo.PLAYER_LINEAR_VELOCITY_Y);
     }
@@ -97,16 +102,21 @@ public class Player extends Sprite {
         body.setLinearVelocity(0f, 0f);
     }
 
+    //Called when GamePlay screen is activated
     public void drawIdle(SpriteBatch batch) {
         if(!isAlive) {
             batch.draw(this, getX() - getWidth() / 2f, getY() - getHeight() / 2f);
         }
     }
 
+
+    // Generate player animation
     public void animatePlayer(SpriteBatch batch) {
         if(isAlive) {
-            elapsedTime += Gdx.graphics.getDeltaTime();
-            batch.draw(animation.getKeyFrame(elapsedTime,true), getX() - (getWidth() / 2f), getY() - (getHeight() / 2f) );
+            if(GameManager.getInstance().getGameStatus()) {
+                elapsedTime += Gdx.graphics.getDeltaTime();
+            }
+            batch.draw(animation.getKeyFrame(elapsedTime, true), getX() - (getWidth() / 2f), getY() - (getHeight() / 2f));
         }
     }
 
@@ -114,8 +124,7 @@ public class Player extends Sprite {
         setPosition(body.getPosition().x * GameInfo.PPM, body.getPosition().y * GameInfo.PPM);
     }
 
-    void createAnimation() {
-
+    private void createAnimation() {
         // Select the atlase of the choosen player
         playerAtlasName = playerName.substring(0, playerName.length() - 4) + ".atlas";
         TextureAtlas playerAtlas = new TextureAtlas(playerAtlasName);

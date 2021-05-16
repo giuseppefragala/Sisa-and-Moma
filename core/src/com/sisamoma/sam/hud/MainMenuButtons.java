@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+//import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -28,6 +29,7 @@ import com.sisamoma.sam.helpers.GameInfo;
 import com.sisamoma.sam.helpers.GameManager;
 import com.sisamoma.sam.scenes.GamePlay;
 import com.sisamoma.sam.scenes.HighScores;
+import com.sisamoma.sam.scenes.MainMenu;
 
 
 public class MainMenuButtons {
@@ -67,7 +69,7 @@ public class MainMenuButtons {
 
     } // MainMenuButtons
 
-    void createAndPositionButtons() {
+    private void createAndPositionButtons() {
         playBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("Play.png"))));
         scoreBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("Score.png"))));
 
@@ -79,6 +81,7 @@ public class MainMenuButtons {
             public void changed(ChangeEvent event, Actor actor) {
                 game.setScreen(new GamePlay(game));
                 stage.dispose();
+
             }
         });
 
@@ -86,12 +89,13 @@ public class MainMenuButtons {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 game.setScreen(new HighScores(game));
-                //showScore();
+                stage.dispose();
             }
         });
+
     } // createAndPositionButtons()
 
-    void changeMusicBtn() {
+    private void changeMusicBtn() {
         if(musicBtn != null){
             musicBtn.remove();
         }
@@ -119,7 +123,7 @@ public class MainMenuButtons {
     } // changeMusicBtn()
 
 
-    void changeSoundBtn() {
+    private void changeSoundBtn() {
         if(soundBtn != null){
             soundBtn.remove();
         }
@@ -148,16 +152,14 @@ public class MainMenuButtons {
 
 
 
-    void changePlayer() {
-
+    private void changePlayer() {
         if(changePlayerBtn != null){
             changePlayerBtn.remove();
         }
-
-        playerLabel.setText(GameManager.getInstance().getPlayer().substring(0,4).toUpperCase());
-
-        changePlayerBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture(GameManager.getInstance().getPlayer()))));
+        changePlayerBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture(GameManager.getInstance().getPlayerImageName()))));
         changePlayerBtn.setPosition(GameInfo.WIDTH - 75, GameInfo.HIGHT - 75, Align.center);
+
+        playerLabel.setText(GameManager.getInstance().getPlayerImageName().substring(0,4).toUpperCase());
 
         changePlayerBtn.addListener(new ChangeListener() {
             @Override
@@ -186,22 +188,24 @@ public class MainMenuButtons {
     }
 
 
-    void createLabel() {
+    private void createLabel() {
         // html version doesn't work with freetype
-        FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("GILSANUB.TTF"));
+
+        FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("Mali-Bold.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 80;
+        parameter.shadowColor= Color.BLUE;
+        parameter.shadowOffsetX = 10;
+        parameter.shadowOffsetY = 6;
         BitmapFont font = fontGenerator.generateFont(parameter);
 
 
-        /* this code in case freetype doesn't work
-        BitmapFont font = new BitmapFont(Gdx.files.internal("myfont.fnt"));
-        */
+        //* this code in case freetype doesn't work
+        //BitmapFont font = new BitmapFont(Gdx.files.internal("myfont.fnt"));
+        //*/
         playerLabel = new Label("Sisa", new Label.LabelStyle(font, new Color(204f/255f, 65f/255f, 65f/255f, 1f)));
         playerLabel.setPosition(120, GameInfo.HIGHT - 75, Align.center);
     } // createLabel()
-
-
 
 } // main menu buttons
 

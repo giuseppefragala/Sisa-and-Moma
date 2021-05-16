@@ -25,7 +25,7 @@ public class GroundBody {
         createGroundBody(ground);
     }
 
-    void createGroundBody(Sprite ground) {
+    private void createGroundBody(Sprite ground) {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.StaticBody;
         bodyDef.position.set(ground.getWidth() / GameInfo.PPM, (-ground.getHeight() / 2f  - 30) / GameInfo.PPM);
