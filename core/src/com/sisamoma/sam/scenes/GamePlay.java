@@ -1,6 +1,6 @@
 package com.sisamoma.sam.scenes;
 
-/**
+/*
  * Created by Giuseppe on 23/02/2018. BRANCH DEVELOP
  */
 
@@ -43,46 +43,49 @@ import static com.badlogic.gdx.Gdx.app;
 
 
 public class GamePlay implements Screen, ContactListener {
-    private GameMain game;
-    private World world;
+    private final GameMain game;
+    private final World world;
 
-    private OrthographicCamera mainCamera;
-    private Viewport gameViewport;
+    private final OrthographicCamera mainCamera;
+    private final Viewport gameViewport;
 
-    private OrthographicCamera debugCamera;
-    private Box2DDebugRenderer debugRenderer;
+    private final OrthographicCamera debugCamera;
+    private final Box2DDebugRenderer debugRenderer;
 
-    private Array<Sprite> backgrounds = new Array<Sprite>();
-    private Array<Sprite> grounds = new Array<Sprite>();
+    private final Array<Sprite> backgrounds = new Array<Sprite>();
+    private final Array<Sprite> grounds = new Array<Sprite>();
 
-    private Player player;
-    private GroundBody groundBody;
-    private TopBody topBody;
+    private final Player player;
+    private final GroundBody groundBody;
+    private final TopBody topBody;
 
-    private UIHud hud;
+    private final UIHud hud;
 
     private boolean firstTouch;
     private boolean justPaused;
-    private Preferences prefs;
-    private boolean musicStatus;
-    private boolean soundStatus;
-    private Array<Pipes> pipesArray = new Array<Pipes>();
-    private Array<Coins> coinsArray = new Array<Coins>();
+    private final Preferences prefs;
+    private final boolean musicStatus;
+    private final boolean soundStatus;
+    private final Array<Pipes> pipesArray = new Array<Pipes>();
+    private final Array<Coins> coinsArray = new Array<Coins>();
 
-    private Sound scoreSound, coinSound, playerDiedSound, playerBubbleSound;
+    private final Sound scoreSound;
+    private final Sound coinSound;
+    private final Sound playerDiedSound;
+    private final Sound playerBubbleSound;
 
-    private Music backgroundMusic;
+    private final Music backgroundMusic;
 
     private int count = 0;
 
-    private SequenceAction sa;
-    private RunnableAction run;
+    private final SequenceAction sa;
+    private final RunnableAction run;
 
     private boolean canRestartSa;
-    private boolean isSensor = false;
+    private final boolean isSensor = false;
 
-    private ParticleEffect pe;
-    private Runnable runnable = new Runnable() {
+    private final ParticleEffect pe;
+    private final Runnable runnable = new Runnable() {
         @Override
         public void run() {
             if (GameManager.getInstance().getGameStatus()) {
@@ -103,20 +106,20 @@ public class GamePlay implements Screen, ContactListener {
         this.game = game;
 
         pe = new ParticleEffect();
-        pe.load(Gdx.files.internal("Particles.p"), Gdx.files.internal(""));
-        pe.getEmitters().first().setPosition(GameInfo.WIDTH / 2f, GameInfo.HIGTH / 2f);
+        pe.load(Gdx.files.internal("Scenes/Particles.p"), Gdx.files.internal(""));
+        pe.getEmitters().first().setPosition(GameInfo.WIDTH / 2f, GameInfo.HEIGHT / 2f);
         pe.start();
 
         sa = new SequenceAction();
         run = new RunnableAction();
 
-        mainCamera = new OrthographicCamera(GameInfo.WIDTH, GameInfo.HIGTH);
-        mainCamera.position.set(GameInfo.WIDTH / 2f, GameInfo.HIGTH / 2f, 0);
-        gameViewport = new FitViewport(GameInfo.WIDTH, GameInfo.HIGTH, mainCamera);
+        mainCamera = new OrthographicCamera(GameInfo.WIDTH, GameInfo.HEIGHT);
+        mainCamera.position.set(GameInfo.WIDTH / 2f, GameInfo.HEIGHT / 2f, 0);
+        gameViewport = new FitViewport(GameInfo.WIDTH, GameInfo.HEIGHT, mainCamera);
 
         debugCamera = new OrthographicCamera();
-        debugCamera.setToOrtho(false, GameInfo.WIDTH / GameInfo.PPM, GameInfo.HIGTH / GameInfo.PPM);
-        debugCamera.position.set(GameInfo.WIDTH / 2f, GameInfo.HIGTH / 2f, 0);
+        debugCamera.setToOrtho(false, GameInfo.WIDTH / GameInfo.PPM, GameInfo.HEIGHT / GameInfo.PPM);
+        debugCamera.position.set(GameInfo.WIDTH / 2f, GameInfo.HEIGHT / 2f, 0);
         debugRenderer = new Box2DDebugRenderer();
 
         hud = new UIHud(game);
@@ -127,16 +130,16 @@ public class GamePlay implements Screen, ContactListener {
         world = new World(new Vector2(0, GameInfo.GAMEPLAY_WORLD_G_ACCELERATION), true);
         world.setContactListener(this);
 
-        player = new Player(world, GameInfo.WIDTH / 2f - 30f, GameInfo.HIGTH / 2f);
+        player = new Player(world, GameInfo.WIDTH / 2f - 30f, GameInfo.HEIGHT / 2f);
         groundBody = new GroundBody(world, grounds.get(0));
         topBody = new TopBody(world, grounds.get(0));
 
-        scoreSound = Gdx.audio.newSound(Gdx.files.internal("Score.mp3"));
-        coinSound = Gdx.audio.newSound(Gdx.files.internal("Coin.mp3"));
-        playerDiedSound = Gdx.audio.newSound(Gdx.files.internal("Dead.mp3"));
-        playerBubbleSound = Gdx.audio.newSound(Gdx.files.internal("Bubble.mp3"));
+        scoreSound = Gdx.audio.newSound(Gdx.files.internal("Sounds/Score.mp3"));
+        coinSound = Gdx.audio.newSound(Gdx.files.internal("Sounds/Coin.mp3"));
+        playerDiedSound = Gdx.audio.newSound(Gdx.files.internal("Sounds/Dead.mp3"));
+        playerBubbleSound = Gdx.audio.newSound(Gdx.files.internal("Sounds/Bubble.mp3"));
 
-        backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("game.mp3"));
+        backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("Sounds/game.mp3"));
         backgroundMusic.setLooping(true);
         prefs = app.getPreferences("Data");
         musicStatus = prefs.getBoolean("MusicStatus");
@@ -183,7 +186,7 @@ public class GamePlay implements Screen, ContactListener {
 
     private void createBackgrounds() {
         for (int i = 0; i < 3; i++) {
-            Sprite background = new Sprite(new Texture("backgroung_game.png"));
+            Sprite background = new Sprite(new Texture("Scenes/background_game.png"));
             background.setPosition(i * background.getWidth(), 0);
             backgrounds.add(background);
         }
@@ -191,7 +194,7 @@ public class GamePlay implements Screen, ContactListener {
 
     private void createGrounds() {
         for (int i = 0; i < 3; i++) {
-            Sprite ground = new Sprite(new Texture("ground.png"));
+            Sprite ground = new Sprite(new Texture("Scenes/ground.png"));
             ground.setPosition(i * ground.getWidth(), 0);
             grounds.add(ground);
         }

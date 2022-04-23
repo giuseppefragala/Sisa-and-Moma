@@ -1,6 +1,6 @@
 package com.sisamoma.sam.hud;
 
-/**
+/*
  * Created by Giuseppe on 23/02/2018.
  */
 
@@ -29,10 +29,10 @@ import com.sisamoma.sam.scenes.MainMenu;
 
 public class UIHud {
 
-    private GameMain game;
+    private final GameMain game;
 
-    private Stage stage;
-    private Viewport gameViewport;
+    private final Stage stage;
+    private final Viewport gameViewport;
     private Label scoreLabel;
     private ImageButton retryBtn, quitBtn, gamePlayBtn, gamePauseBtn;
     private int score;
@@ -40,7 +40,7 @@ public class UIHud {
 
     public UIHud(GameMain game) {
         this.game = game;
-        gameViewport = new FitViewport(GameInfo.WIDTH, GameInfo.HIGTH, new OrthographicCamera());
+        gameViewport = new FitViewport(GameInfo.WIDTH, GameInfo.HEIGHT, new OrthographicCamera());
         stage = new Stage(gameViewport, game.getBatch());
         createLabel();
         stage.addActor(scoreLabel);
@@ -51,17 +51,17 @@ public class UIHud {
 
 
         // html version doesn't work with freetype
-        FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("Mali-Bold.ttf"));
+        FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("Fonts/Mali-Bold.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 80;
         BitmapFont font = fontGenerator.generateFont(parameter);
 
 
         //* this code in case freetype doesn't work
-        //BitmapFont font = new BitmapFont(Gdx.files.internal("myfont.fnt"));
+        //BitmapFont font = new BitmapFont(Gdx.files.internal("Fonts/myfont.fnt"));
         //*/
         scoreLabel = new Label(String.valueOf(score), new Label.LabelStyle(font, new Color(204f / 255f, 65f / 255f, 65f / 255f, 1f)));
-        scoreLabel.setPosition(GameInfo.WIDTH / 2f - scoreLabel.getWidth() / 2f - 330, GameInfo.HIGTH / 2F + 180, Align.left);
+        scoreLabel.setPosition(GameInfo.WIDTH / 2f - scoreLabel.getWidth() / 2f - 330, GameInfo.HEIGHT / 2F + 180, Align.left);
     } // createLabel()
 
     public void showPlayButtons() {
@@ -71,10 +71,10 @@ public class UIHud {
         }
 
         if (gameStatus) {
-            gamePlayBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("gamePause.png"))));
+            gamePlayBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("Buttons/gamePauseButton.png"))));
             game.resume();
         } else {
-            gamePlayBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("gamePlay.png"))));
+            gamePlayBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("Buttons/gamePlayButton.png"))));
             game.pause();
         }
 
@@ -94,11 +94,11 @@ public class UIHud {
 
 
     public void createButtons() {
-        retryBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("Retry.png"))));
-        quitBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("Quit.png"))));
+        retryBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("Buttons/restartButton.png"))));
+        quitBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("Buttons/closeButton.png"))));
 
-        retryBtn.setPosition(GameInfo.WIDTH / 2f - (retryBtn.getWidth() / 2f) - 100f, GameInfo.HIGTH / 2f - 55f);
-        quitBtn.setPosition(GameInfo.WIDTH / 2f - (quitBtn.getWidth() / 2f) + 100f, GameInfo.HIGTH / 2f - 50f);
+        retryBtn.setPosition(75f, GameInfo.HEIGHT / 2f - 50f);
+        quitBtn.setPosition(GameInfo.WIDTH - quitBtn.getWidth() - 75f, GameInfo.HEIGHT / 2f - 50f);
 
         retryBtn.addListener(new ChangeListener() {
             @Override

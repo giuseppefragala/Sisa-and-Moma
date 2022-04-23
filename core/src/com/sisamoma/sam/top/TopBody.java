@@ -1,6 +1,6 @@
 package com.sisamoma.sam.top;
 
-/**
+/*
  * Created by Giuseppe on 23/02/2018.
  */
 
@@ -19,7 +19,7 @@ import com.sisamoma.sam.helpers.GameInfo;
 
 public class TopBody {
 
-    private World world;
+    private final World world;
     private Body body;
 
     public TopBody(World world, Sprite ground) {
@@ -30,7 +30,7 @@ public class TopBody {
     private void createTopBody(Sprite top) {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.StaticBody;
-        bodyDef.position.set(top.getWidth() / GameInfo.PPM, (GameInfo.HIGTH + 10f) / GameInfo.PPM);
+        bodyDef.position.set(top.getWidth() / GameInfo.PPM, (GameInfo.HEIGHT + 10f) / GameInfo.PPM);
 
         body = world.createBody(bodyDef);
 

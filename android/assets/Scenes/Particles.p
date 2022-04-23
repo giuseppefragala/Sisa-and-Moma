@@ -190,5 +190,5 @@ behind: true
 premultipliedAlpha: false
 spriteMode: random
 - Image Paths -
-logo64.png
+particleBubble.png
 

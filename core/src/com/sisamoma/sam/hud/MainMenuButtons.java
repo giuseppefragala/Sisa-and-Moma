@@ -1,6 +1,6 @@
 package com.sisamoma.sam.hud;
 
-/**
+/*
  * Created by Giuseppe on 23/02/2018.
  */
 
@@ -31,15 +31,15 @@ import com.sisamoma.sam.scenes.HighScores;
 
 public class MainMenuButtons {
 
-    private GameMain game;
+    private final GameMain game;
 
-    private Stage stage;
-    private Viewport gameViewport;
-    private ImageButton playBtn, scoreBtn, changePlayerBtn, musicBtn, soundBtn;
+    private final Stage stage;
+    private final Viewport gameViewport;
+    private ImageButton playBtn, scoreBtn, changePlayerBtn, musicBtn, soundBtn, exitBtn;
     private boolean playMusic, playSound;
     private Label playerLabel;
-    private Sound changePlayerSound;
-    private Preferences prefs;
+    private final Sound changePlayerSound;
+    private final Preferences prefs;
     private boolean musicStatus;
     private boolean soundStatus;
 
@@ -48,15 +48,16 @@ public class MainMenuButtons {
         prefs = Gdx.app.getPreferences("Data");
 
 
-        gameViewport = new FitViewport(GameInfo.WIDTH, GameInfo.HIGTH, new OrthographicCamera());
+        gameViewport = new FitViewport(GameInfo.WIDTH, GameInfo.HEIGHT, new OrthographicCamera());
         stage = new Stage(gameViewport, game.getBatch());
 
         createAndPositionButtons();
 
         stage.addActor(playBtn);
         stage.addActor(scoreBtn);
+        stage.addActor(exitBtn);
 
-        changePlayerSound = Gdx.audio.newSound(Gdx.files.internal("changePlayer.mp3"));
+        changePlayerSound = Gdx.audio.newSound(Gdx.files.internal("Sounds/changePlayer.mp3"));
         createLabel();
         changePlayer();
         changeMusicBtn();
@@ -67,18 +68,20 @@ public class MainMenuButtons {
     } // MainMenuButtons
 
     private void createAndPositionButtons() {
-        playBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("Play.png"))));
-        scoreBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("Score.png"))));
+        playBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("Buttons/playButton.png"))));
+        scoreBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("Buttons/showScoreButton.png"))));
+        exitBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("Buttons/exitButton.png"))));
 
-        playBtn.setPosition(75, GameInfo.HIGTH / 2f, Align.center);
-        scoreBtn.setPosition(GameInfo.WIDTH - 75, GameInfo.HIGTH / 2f, Align.center);
+
+        playBtn.setPosition(75, GameInfo.HEIGHT / 2f, Align.center);
+        scoreBtn.setPosition(GameInfo.WIDTH - 75, GameInfo.HEIGHT / 2f, Align.center);
+        exitBtn.setPosition(GameInfo.WIDTH / 2f, 75, Align.center);
 
         playBtn.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 game.setScreen(new GamePlay(game));
                 stage.dispose();
-
             }
         });
 
@@ -87,6 +90,13 @@ public class MainMenuButtons {
             public void changed(ChangeEvent event, Actor actor) {
                 game.setScreen(new HighScores(game));
                 stage.dispose();
+            }
+        });
+
+        exitBtn.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                Gdx.app.exit();
             }
         });
 
@@ -99,9 +109,9 @@ public class MainMenuButtons {
 
         musicStatus = prefs.getBoolean("MusicStatus");
         if (musicStatus) {
-            musicBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("musicOn.png"))));
+            musicBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("Buttons/musicOnButton.png"))));
         } else {
-            musicBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("musicOff.png"))));
+            musicBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("Buttons/musicOffButton.png"))));
         }
 
         musicBtn.setPosition(GameInfo.WIDTH - 75, 75, Align.center);
@@ -127,9 +137,9 @@ public class MainMenuButtons {
 
         soundStatus = prefs.getBoolean("SoundStatus");
         if (soundStatus) {
-            soundBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("soundOn.png"))));
+            soundBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("Buttons/soundOnButton.png"))));
         } else {
-            soundBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("soundOff.png"))));
+            soundBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("Buttons/soundOffButton.png"))));
         }
 
         soundBtn.setPosition(75, 75, Align.center);
@@ -153,7 +163,7 @@ public class MainMenuButtons {
             changePlayerBtn.remove();
         }
         changePlayerBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture(GameManager.getInstance().getPlayerImageName()))));
-        changePlayerBtn.setPosition(GameInfo.WIDTH - 75, GameInfo.HIGTH - 75, Align.center);
+        changePlayerBtn.setPosition(GameInfo.WIDTH - 75, GameInfo.HEIGHT - 75, Align.center);
 
         playerLabel.setText(GameManager.getInstance().getPlayerImageName().substring(0, 4).toUpperCase());
 
@@ -187,7 +197,7 @@ public class MainMenuButtons {
     private void createLabel() {
         // html version doesn't work with freetype
 
-        FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("Mali-Bold.ttf"));
+        FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("Fonts/Mali-Bold.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 80;
         parameter.shadowColor = Color.BLUE;
@@ -197,10 +207,10 @@ public class MainMenuButtons {
 
 
         //* this code in case freetype doesn't work
-        //BitmapFont font = new BitmapFont(Gdx.files.internal("myfont.fnt"));
+        //BitmapFont font = new BitmapFont(Gdx.files.internal("Fonts/myfont.fnt"));
         //*/
         playerLabel = new Label("Sisa", new Label.LabelStyle(font, new Color(204f / 255f, 65f / 255f, 65f / 255f, 1f)));
-        playerLabel.setPosition(120, GameInfo.HIGTH - 75, Align.center);
+        playerLabel.setPosition(120, GameInfo.HEIGHT - 75, Align.center);
     } // createLabel()
 
 } // main menu buttons

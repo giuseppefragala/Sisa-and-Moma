@@ -1,6 +1,6 @@
 package com.sisamoma.sam.coins;
 
-/**
+/*
  * Created by Giuseppe on 23/02/2018.
  */
 
@@ -24,7 +24,7 @@ import com.sisamoma.sam.helpers.GameManager;
 
 public class Coins extends Sprite {
 
-    private World world;
+    private final World world;
     private Body body;
 
     private Animation<TextureRegion> animation;
@@ -78,7 +78,7 @@ public class Coins extends Sprite {
     }
 
     private void createAnimation() {
-        TextureAtlas coinAtlas = new TextureAtlas("coins.atlas");
+        TextureAtlas coinAtlas = new TextureAtlas("Scenes/coins.atlas");
         animation = new Animation<TextureRegion>(1f / 12f, coinAtlas.getRegions()); // 1f/7f = 7 frame al secondo
     }
 
@@ -88,7 +88,7 @@ public class Coins extends Sprite {
 
     public void moveCoin() {
         body.setLinearVelocity(-1, 0);
-        if (this.getX() + (GameInfo.WIDTH / 2) + 160 < mainCamera.position.x) {
+        if (this.getX() + (GameInfo.WIDTH / 2f) + 160 < mainCamera.position.x) {
             body.setActive(false);
         }
     }
@@ -109,8 +109,8 @@ public class Coins extends Sprite {
 
     // Sostituito da GameManager.getInstance().getRandomY();
 /*    float getRandomY() {
-        float max = (GameInfo.HIGTH)/ 2f + 20;
-        float min = (GameInfo.HIGTH)/ 2f - 20;
+        float max = (GameInfo.HEIGHT)/ 2f + 20;
+        float min = (GameInfo.HEIGHT)/ 2f - 20;
         return random.nextFloat() * (max - min) + min;
     }*/
 

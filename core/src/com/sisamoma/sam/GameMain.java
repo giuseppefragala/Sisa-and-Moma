@@ -15,7 +15,6 @@ public class GameMain extends Game {
     @Override
     public void create() {
 
-
         //Assegna lo SpriteBacth (l'unico, perchè gli SpriteBach consumano risorse)
         // a questa classe Game (la classe GameMain)
         batch = new SpriteBatch();

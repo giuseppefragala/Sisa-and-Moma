@@ -7,7 +7,7 @@ package com.sisamoma.sam.helpers;
 
 public class GameInfo {
     public static final int WIDTH = 800;
-    public static final int HIGTH = 480;
+    public static final int HEIGHT = 480;
     public static final float PPM = 100f;
     public static final float BACKGROUND_SPEED = 2f;
     public static final float GROUND_SPEED = 2f;
@@ -34,5 +34,9 @@ public class GameInfo {
     public static final String COIN_USERDATA = "Coin";
 
     public static final int SCORE_WIDTH = 3;
+
+    public static final float PIPES_LINEAR_VELOCITY_X = -0.8f;
+    public static final float PIPES_LINEAR_VELOCITY_Y = -0f;
+
 }
 

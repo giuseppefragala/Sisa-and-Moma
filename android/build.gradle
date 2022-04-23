@@ -1,6 +1,5 @@
 android {
-    buildToolsVersion '28.0.3'
-    compileSdkVersion 30
+    compileSdkVersion 31
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
@@ -15,16 +14,18 @@ android {
         androidTest.setRoot('tests')
     }
     packagingOptions {
-        exclude 'META-INF/robovm/ios/robovm.xml'
+        resources {
+            excludes += ['META-INF/robovm/ios/robovm.xml']
+        }
     }
     defaultConfig {
         applicationId "com.sisamoma.sam"
         minSdkVersion 14
-        targetSdkVersion 30
+        targetSdkVersion 31
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 }
 
@@ -114,8 +115,8 @@ task run(type: Exec) {
 idea {
     module {
         sourceDirs += file("src")
-        scopes = [COMPILE: [plus: [project.configurations.compile]]]
-
+        scopes = [COMPILE: [plus: [project.configurations.implementation]]]
+        configurations.implementation.setCanBeResolved(true)
         iml {
             withXml {
                 def node = it.asNode()

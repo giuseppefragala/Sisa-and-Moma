@@ -1,6 +1,6 @@
 package com.sisamoma.sam.players;
 
-/**
+/*
  * Created by Giuseppe on 23/02/2018.
  */
 
@@ -22,18 +22,18 @@ import com.sisamoma.sam.helpers.GameInfo;
 import com.sisamoma.sam.helpers.GameManager;
 
 public class Player extends Sprite {
-    private World world;
+    private final World world;
     private Body body;
     private boolean isAlive;
-    private Texture playerDead;
+    private final Texture playerDead;
     private Animation<TextureRegion> animation;
     private float elapsedTime;
-    private String playerName;
-    private String playerKoName;
+    private final String playerName;
+    private final String playerKoName;
     private String playerAtlasName;
 
     public Player(World world, float x, float y) {
-        // In the play screen, when starting, shows the choosen player from the menu screen
+        // In the play screen, when starting, shows the chosen player from the menu screen
         super(new Texture(GameManager.getInstance().getPlayerImageName()));
 
         playerName = GameManager.getInstance().getPlayerImageName();
@@ -124,7 +124,7 @@ public class Player extends Sprite {
     }
 
     private void createAnimation() {
-        // Select the atlase of the choosen player
+        // Select the atlas of the chosen player
         playerAtlasName = playerName.substring(0, playerName.length() - 4) + ".atlas";
         TextureAtlas playerAtlas = new TextureAtlas(playerAtlasName);
 

@@ -12,9 +12,8 @@ public class DesktopLauncher {
 
         config.title = "Pino's Best Game Ever";
         //config.useGL30 = true;
-
         config.width = GameInfo.WIDTH;
-        config.height = GameInfo.HIGTH;
+        config.height = GameInfo.HEIGHT;
         //config.fullscreen=true;
 
         new LwjglApplication(new GameMain(), config);

@@ -1,6 +1,6 @@
 package com.sisamoma.sam.ground;
 
-/**
+/*
  * Created by Giuseppe on 23/02/2018.
  */
 
@@ -16,7 +16,7 @@ import com.sisamoma.sam.helpers.GameInfo;
 
 public class GroundBody {
 
-    private World world;
+    private final World world;
     private Body body;
 
     public GroundBody(World world, Sprite ground) {

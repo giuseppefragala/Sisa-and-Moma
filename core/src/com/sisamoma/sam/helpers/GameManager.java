@@ -8,7 +8,7 @@ package com.sisamoma.sam.helpers;
 public class GameManager {
     private static final GameManager instance = new GameManager();
 
-    private final String[] playersImageNameArray = {"sisa.png", "moma.png"};
+    private final String[] playersImageNameArray = {"Players/sisa.png", "Players/moma.png"};
     private int index = 1;
 
     private float randomY;

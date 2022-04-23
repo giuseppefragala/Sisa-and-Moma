@@ -1,6 +1,6 @@
 package com.sisamoma.sam.scenes;
 
-/**
+/*
  * Created by Giuseppe on 23/02/2018.
  */
 
@@ -20,32 +20,34 @@ import com.sisamoma.sam.hud.MainMenuButtons;
 
 public class MainMenu implements Screen {
 
-    private GameMain game;
-    private Texture background;
-    private OrthographicCamera mainCamera;
-    private Viewport gameViewport;
-    private MainMenuButtons mainMenuButtons;
-    private Music backgroundMusic;
+    private final GameMain game;
+    private final Texture background;
+    private final OrthographicCamera mainCamera;
+    private final Viewport gameViewport;
+    private final MainMenuButtons mainMenuButtons;
+    private final Music backgroundMusic;
 
     public MainMenu(GameMain game) {
-        //Il parametro game (una classe di tipo GameMain e quindi Game)
-        //serve per ottenere il riferimento del suo Spritebatch, tramite game.getBatch()
-        //del quale si utilizza il metodo game.getBatch().draw(), per disegnare lo sfondo
-        //ed impostarne la ProjectionMatrix
+        /*
+            Il parametro game (una classe di tipo GameMain e quindi Game)
+            serve per ottenere il riferimento del suo Spritebatch, tramite game.getBatch()
+            del quale si utilizza il metodo game.getBatch().draw(), per disegnare lo sfondo
+            ed impostarne la ProjectionMatrix
+        */
         this.game = game;
 
         mainCamera = new OrthographicCamera();
-        mainCamera.setToOrtho(false, GameInfo.WIDTH, GameInfo.HIGTH);
-        mainCamera.position.set(GameInfo.WIDTH / 2f, GameInfo.HIGTH / 2f, 0);
+        mainCamera.setToOrtho(false, GameInfo.WIDTH, GameInfo.HEIGHT);
+        mainCamera.position.set(GameInfo.WIDTH / 2f, GameInfo.HEIGHT / 2f, 0);
 
-        gameViewport = new FitViewport(GameInfo.WIDTH, GameInfo.HIGTH, mainCamera);
+        gameViewport = new FitViewport(GameInfo.WIDTH, GameInfo.HEIGHT, mainCamera);
 
-        background = new Texture("Background_menu.png");
+        background = new Texture("Scenes/Background_menu.png");
         mainMenuButtons = new MainMenuButtons(game);
 
         Gdx.input.setInputProcessor(mainMenuButtons.getStage());
 
-        backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("menu.mp3"));
+        backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("Sounds/menu.mp3"));
         backgroundMusic.setLooping(true);
     } //MainMenu
 

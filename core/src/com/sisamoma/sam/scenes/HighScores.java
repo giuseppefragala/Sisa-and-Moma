@@ -1,6 +1,6 @@
 package com.sisamoma.sam.scenes;
 
-/**
+/*
  * Created by Giuseppe on 23/02/2018.
  */
 
@@ -32,25 +32,25 @@ import static com.badlogic.gdx.Gdx.app;
 
 public class HighScores implements Screen {
 
-    private GameMain game;
-    private Stage stage;
-    private Texture background;
-    private OrthographicCamera mainCamera;
-    private Viewport gameViewport;
+    private final GameMain game;
+    private final Stage stage;
+    private final Texture background;
+    private final OrthographicCamera mainCamera;
+    private final Viewport gameViewport;
     private ImageButton backBtn;
     private Label scoreLabel;
-    private Music backgroundMusic;
+    private final Music backgroundMusic;
 
     public HighScores(GameMain game) {
         this.game = game;
 
         mainCamera = new OrthographicCamera();
-        mainCamera.setToOrtho(false, GameInfo.WIDTH, GameInfo.HIGTH);
-        mainCamera.position.set(GameInfo.WIDTH / 2f, GameInfo.HIGTH / 2f, 0);
-        gameViewport = new FitViewport(GameInfo.WIDTH, GameInfo.HIGTH, mainCamera);
+        mainCamera.setToOrtho(false, GameInfo.WIDTH, GameInfo.HEIGHT);
+        mainCamera.position.set(GameInfo.WIDTH / 2f, GameInfo.HEIGHT / 2f, 0);
+        gameViewport = new FitViewport(GameInfo.WIDTH, GameInfo.HEIGHT, mainCamera);
         stage = new Stage(gameViewport, game.getBatch());
-        background = new Texture("background_hs.jpg");
-        backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("highscore.mp3"));
+        background = new Texture("Scenes/backgroundHighScores.jpg");
+        backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("Sounds/highscore.mp3"));
         backgroundMusic.setLooping(true);
 
         createAndPositionButtons();
@@ -121,7 +121,7 @@ public class HighScores implements Screen {
         }
 
         // freetype doesn't work in html version
-        FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("Mali-Bold.ttf"));
+        FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("Fonts/Mali-Bold.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 80;
         parameter.shadowColor = Color.BLUE;
@@ -131,24 +131,24 @@ public class HighScores implements Screen {
 
         //* this lines of code are used in case freetype doesn't work
         //Color color =  new Color(204.0f, 65.0f, 65.0f, 1.0f);
-        //BitmapFont font = new BitmapFont(Gdx.files.internal("myfont.fnt"));
+        //BitmapFont font = new BitmapFont(Gdx.files.internal("Fonts/myfont.fnt"));
         //*/
         scoreLabel = new Label("High Scores", new Label.LabelStyle(fontScoreLabel, new Color(204f / 255f, 65f / 255f, 65f / 255f, 1f)));
-        scoreLabel.setPosition(GameInfo.WIDTH / 2f, GameInfo.HIGTH / 2f + 150f, Align.center);
+        scoreLabel.setPosition(GameInfo.WIDTH / 2f, GameInfo.HEIGHT / 2f + 150f, Align.center);
         stage.addActor(scoreLabel);
 
         //parameter.size = 150;
         //BitmapFont fontScoreValue = fontGenerator.generateFont(parameter);
         Preferences prefs = Gdx.app.getPreferences("Data");
         scoreLabel = new Label(String.valueOf(prefs.getInteger("Score")), new Label.LabelStyle(fontScoreLabel, new Color(204f / 255f, 65f / 255f, 65f / 255f, 1f)));
-        scoreLabel.setPosition(GameInfo.WIDTH / 2f, GameInfo.HIGTH / 2f, Align.center);
+        scoreLabel.setPosition(GameInfo.WIDTH / 2f, GameInfo.HEIGHT / 2f, Align.center);
         stage.addActor(scoreLabel);
 
     } // showScore()
 
     private void createAndPositionButtons() {
-        backBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("Back.png"))));
-        backBtn.setPosition(GameInfo.WIDTH / 2f, GameInfo.HIGTH / 2f - 150f, Align.center);
+        backBtn = new ImageButton(new SpriteDrawable(new Sprite(new Texture("Buttons/backButton.png"))));
+        backBtn.setPosition(GameInfo.WIDTH / 2f, GameInfo.HEIGHT / 2f - 150f, Align.center);
 
         backBtn.addListener(new ChangeListener() {
             @Override
